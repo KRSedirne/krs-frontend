@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { login } from '../../api/auth/auth';
+import toast from 'react-hot-toast';
 import './Login.css';
 import {
   Container,
@@ -12,17 +14,42 @@ import {
   Box,
   Divider
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Handle login logic
-    console.log('Logging in with', email, password, rememberMe);
+
+    const data = {
+      email: email,
+      password: password
+    }
+
+    const fetchData = async (data) => {
+      try {
+        const response = await login(data)
+        console.log(response)
+        if(response.success) {
+          navigate('/profile')
+        }
+      } catch (error) {
+        console.log(error)
+        toast.error(error.response.data.message)
+      }
+    }
+    fetchData(data)
+
   };
+
+
 
 //   const handleForgotPassword = () => {
 //     // Navigate to Forgot Password page

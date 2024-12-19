@@ -3,7 +3,12 @@ import { BaseUrl } from "../constant";
 
 export const getProfile = async () => {
     try {
-        const response = await axios.get(`${BaseUrl}/user/profile`);
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`${BaseUrl}/user/profile`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         throw error;
@@ -12,7 +17,12 @@ export const getProfile = async () => {
 
 export const updatePassword = async (data) => {
     try {
-        const response = await axios.put(`${BaseUrl}/user/password/update`, data);
+        const token = localStorage.getItem('authToken');
+        const response = await axios.put(`${BaseUrl}/user/password/update`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         throw error;

@@ -39,39 +39,38 @@ const ProfileForm = () => {
   return (
     <Box sx={{display:'flex', justifyContent:'center', alignItems:'center', height:'100vh'}}>
       <Card sx={{ maxWidth: 750, width: '100%', height: 750, backgroundColor: '#00000'  }}>
-          <Avatar
-          alt="Remy Sharp"
-          src="/images/default_avatar.png"
-          sx={{ width: 156, height: 156, alignContent: 'center', marginLeft: 'auto', marginRight: 'auto', marginTop: 2 }}
-          />
-          <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off"> 
-            <CardContent>
-                <Box sx={{  display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12}}>
-                  <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Name</Typography>
-                  <TextField id="outlined-name-input" type="name" value={name} InputProps={{ readOnly: true}}/>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
-                  <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Surname</Typography>
-                  <TextField id="outlined-surname-input" type="surname" value={lastname} InputProps={{ readOnly: true}} />
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
-                  <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Email</Typography>
-                  <TextField id="outlined-email-input" type="email" value={email} InputProps={{ readOnly: true}}/>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
-                  <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Password</Typography>
-                  <TextField sx={{ width:'300px' }} id="outlined-password-input" type="password" value={password} InputProps={{ readOnly: true}}/>
-                </Box>
-                  
-                <Button variant="contained" color="primary" style={{marginTop: 10}} disabled={isLoading} onClick={() => setIsShowUpdatePasswordModal(true) }>
-                  {isLoading ? "wait..." : "Update Password"}
-                </Button>
-                {IsShowUpdatePasswordModal && (
-                  <UpdatePasswordModal setIsShowUpdatePasswordModal={setIsShowUpdatePasswordModal} />
-                )}
-                
-            </CardContent>
-          </Box>
+        <Avatar
+        alt="Remy Sharp"
+        src="/images/default_avatar.png"
+        sx={{ width: 156, height: 156, alignContent: 'center', marginLeft: 'auto', marginRight: 'auto', marginTop: 2 }}
+        />
+        <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }} noValidate autoComplete="off"> 
+          <CardContent>
+            <Box sx={{  display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12}}>
+              <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Name</Typography>
+              <TextField id="outlined-name-input" type="name" value={name} InputProps={{ readOnly: true}}/>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
+              <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Surname</Typography>
+              <TextField id="outlined-surname-input" type="surname" value={lastname} InputProps={{ readOnly: true}} />
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
+              <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Email</Typography>
+              <TextField id="outlined-email-input" type="email" value={email} InputProps={{ readOnly: true}}/>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2, justifyContent: 'center', marginRight: 12 }}>
+              <Typography style={{ width: '100px', fontSize:'20px', fontWeight:'bold' }}>Password</Typography>
+              <TextField sx={{ width:'300px' }} id="outlined-password-input" type="password" value={password} InputProps={{ readOnly: true}}/>
+            </Box>
+              
+            <Button variant="contained" color="primary" style={{marginTop: 10}} disabled={isLoading} onClick={() => setIsShowUpdatePasswordModal(true) }>
+              {isLoading ? "wait..." : "Update Password"}
+            </Button>
+            {IsShowUpdatePasswordModal && (
+              <UpdatePasswordModal setIsShowUpdatePasswordModal={setIsShowUpdatePasswordModal} />
+            )}
+          </CardContent>
+        </Box>
       </Card>
     </Box>
   )

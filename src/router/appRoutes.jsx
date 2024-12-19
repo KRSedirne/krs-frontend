@@ -10,8 +10,8 @@ import Register from "../components/auth/Register.jsx";
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/ablock" element={<ABlock />} />
             <Route path="/bblock" element={<BBlock />} />

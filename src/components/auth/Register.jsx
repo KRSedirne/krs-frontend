@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { register } from '../../api/auth/auth';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import {
   Container,
   TextField,
@@ -10,12 +13,13 @@ import {
 } from '@mui/material';
 
 const RegisterPage = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -25,11 +29,29 @@ const RegisterPage = () => {
       return;
     }
 
-    console.log('Kayıt olunuyor:', {
-      firstName,
-      lastName,
+    const data = {
+      name,
+      lastname,
       email,
-      phoneNumber,
+      password,
+    };
+
+    const fetchData = async (data) => {
+      try {
+        const response = await register(data);
+        console.log(response);
+        navigate('/profile');
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    };
+
+    fetchData(data);
+
+    console.log('Kayıt olunuyor:', {
+      name,
+      lastname,
+      email,
       password,
     });
   };
@@ -72,8 +94,8 @@ const RegisterPage = () => {
               fullWidth
               margin="normal"
               label="İsim"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
 
@@ -82,8 +104,8 @@ const RegisterPage = () => {
               fullWidth
               margin="normal"
               label="Soyisim"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={lastname}
+              onChange={(e) => setLastname(e.target.value)}
               required
             />
 
