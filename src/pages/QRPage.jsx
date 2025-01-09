@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid2';
-import ColumnOne from "./components/ColumnOne";
-import ColumnTwo from "./components/ColumnTwo";
+import ColumnOne from "../components/qr/ColumnOne";
+import ColumnTwo from "../components/qr/ColumnTwo";
 
 export default function QRPage() {
     let boxsx={

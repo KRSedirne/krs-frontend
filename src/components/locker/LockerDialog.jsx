@@ -6,28 +6,18 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function LockerDialog() {
-  const [open, setOpen] = React.useState(false);
+export default function LockerDialog(props) {
 
-  const handleClickOpen = () => {
-    setOpen(true);
-    //otomatik oluştur
-  };
-  const handleClosebySubmit=()=>{
-    setOpen(false);
-
-  }
-
-  const handleClose = () => {
-    setOpen(false);
-    //sil
-  };
+  const {
+    handleClose,
+    handleClosebySubmit,
+    expaireDate, 
+    open, 
+  } = props;
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button>
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -39,14 +29,14 @@ export default function LockerDialog() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {"Rezervasonunuz "+props.expaireDate+" tarihine kadardır."}
+            {"Rezervasyonunuz " + expaireDate + " tarihine kadardır."}
             {"Anahtarı görevliden alabilir, iade tarihine kadar geri verebilirsiniz."}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>İptal</Button>
           <Button onClick={handleClosebySubmit} autoFocus>
-            Agree
+            Onayla
           </Button>
         </DialogActions>
       </Dialog>

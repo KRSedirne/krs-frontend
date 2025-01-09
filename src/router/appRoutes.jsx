@@ -5,6 +5,8 @@ import ABlock from "../components/saloons/ABlock.jsx";
 import BBlock from "../components/saloons/BBlock.jsx";
 import Login from "../components/auth/Login.jsx";
 import Register from "../components/auth/Register.jsx";
+import LockerPage from "../pages/LockerPage.jsx";
+import QRPage from "../pages/QRPage.jsx";
 
 
 const AppRoutes = () => {
@@ -15,6 +17,8 @@ const AppRoutes = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/ablock" element={<ABlock />} />
             <Route path="/bblock" element={<BBlock />} />
+            <Route path="/locker" element={<LockerPage/>}/>
+            <Route path="/qr" element={<QRPage/>}/>
         </Routes>
     )
 }

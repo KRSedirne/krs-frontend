@@ -1,7 +1,7 @@
 import { Stack, Button,TextField } from '@mui/material';
 import QR from './QR';
 import React, { useEffect, useState } from "react";
-import { getReservation } from '../../../api/reservation/QR';
+import { getReservation } from '../../api/reservation/QR';
 import { toast } from 'react-toastify';
 
 
