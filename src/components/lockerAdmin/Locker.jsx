@@ -6,7 +6,6 @@ export default function Locker (props)  {
 
   const {
     isBooked,
-    isDisabled,
     onClick,
     lockerNum,
     width,
@@ -26,37 +25,53 @@ export default function Locker (props)  {
     border:"3px solid #3c3c3c ",
     borderRadius: 1,
     margin:"1px",
-    cursor: isDisabled ? "not-allowed" : "pointer", // Kullanılabilirlik kontrolü
   };
+  
 
-  let lockerStyleUnlocked={
+  const lockerStyleUnlocked={
     ...lockerStyle,
     backgroundColor:"#e9e9e9",
     border: '3px solid #574533',
     borderRadius:1
   }
+  const lockerStyleNew={
+    ...lockerStyle,
+    border: "3px dashed rgb(28, 85, 123)", // Çizgili sınır
+  borderRadius: 1, // Kenar yuvarlama
+  margin: "1px",
+  cursor: "pointer",
+  backgroundColor:"rgba(0,0,0,0)"
+  }
+  if(!isBooked){
+    lockerStyle=lockerStyleUnlocked;
+  }
+  else if(isBooked==="new"){
+    lockerStyle=lockerStyleNew;
+  }
+  
 
-  let lockerTopology={
+  const lockerTopology={
     position: "absolute",
     color: "white",
     fontWeight: "bold",
-    fontSize:fontSize
   }
 
-  let lockerUnlockedTopology={
+  const lockerUnlockedTopology={
     ...lockerTopology,
-    color:"#574533", 
-       fontSize:fontSize
-
+    color:"#574533"
   }
+  let plusStyle = {
+    fontSize: "2rem", // Artı sembolü boyutu
+    color: "rgb(28, 85, 123)", // Sembol rengi
+  };
 
   return (
     <Box
-      onClick={!isDisabled ? onClick : undefined}
-      sx={isBooked ? lockerStyle : lockerStyleUnlocked}
+    onClick={onClick}
+      sx={lockerStyle}
     >
       {/* Kilitli dolaplar için ikon eklendi */}
-      {isBooked && (
+      {isBooked===true && (
         <LockIcon
           sx={{
             fontSize: fontSize,
@@ -64,13 +79,13 @@ export default function Locker (props)  {
           }}
         />
       )}
-
+{isBooked==="new"?<Typography sx={plusStyle}>+</Typography>:null}
       {/* Dolap numarası görsel iyileştirildi */}
       <Typography
-        variant="h2"
+        fontSize={fontSize}
         sx={isBooked ? lockerTopology : lockerUnlockedTopology}
       >
-        {lockerNum}
+        {isBooked!=="new"?lockerNum:null}
       </Typography>
     </Box>
   );

@@ -1,7 +1,7 @@
 import { Stack, Button,TextField } from '@mui/material';
 import QR from './QR';
 import React, { useEffect, useState } from "react";
-import { getReservation } from '../../api/reservation/QR';
+import { getQRCode } from '../../api/reservation/QR';
 import { toast } from 'react-toastify';
 
 
@@ -9,13 +9,13 @@ import { toast } from 'react-toastify';
 
 export default function ColumnTwo() {
   const dummyQR="";
-  const  [value,setValue]=useState(dummyQR);
+  const  [value,setValue]=useState("");
   useEffect(() => {
     
     const fetchData = async () => {
       try {
-        const response = await getReservation();
-        setValue(response.data.qrCode)
+        const response = await getQRCode();
+        setValue(response.qrCode)
 
 
       } catch (error) {
@@ -80,7 +80,7 @@ export default function ColumnTwo() {
           <QR value={value} id="qrCodeQl" />
         </div>
       </div>
-      <TextField  sx={{width:"400px"}} id="outlined-basic" label="QR" variant="outlined" fullWidth="300px" onChange={handleValue} value={value} />
+      <TextField  sx={{width:"400px"}} id="outlined-basic" label="QR" variant="outlined" width="300px" onChange={handleValue} value={value} />
           <h2>Lütfen QR Kodunuzu Tarayıcıya Okutunuz</h2>
       <Stack
         direction={'row'}

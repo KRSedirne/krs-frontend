@@ -28,3 +28,16 @@ export const updatePassword = async (data) => {
         throw error;
     }
 }
+export const getUserAdmin = async (userId) => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`${BaseUrl}/admin/user/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

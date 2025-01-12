@@ -14,7 +14,11 @@ export default function LockerDialog(props) {
     expaireDate, 
     open, 
   } = props;
-
+  const dateString = expaireDate;
+  const date = new Date(dateString);
+  date.setDate(date.getDate() + 5);
+  const formattedDate = date.toLocaleDateString("tr-TR");
+  console.log("5 gün sonrası (TR):", formattedDate);
   return (
     <React.Fragment>
 
@@ -24,13 +28,15 @@ export default function LockerDialog(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" sx={{justifyContent:"center"}}>
           {"Rezervasyon için Detaylar"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            {"Rezervasyonunuz " + expaireDate + " tarihine kadardır."}
-            {"Anahtarı görevliden alabilir, iade tarihine kadar geri verebilirsiniz."}
+          <DialogContentText className="alert-dialog-description">
+            {"Rezervasyonunuz " + formattedDate + " tarihine kadardır."}
+          </DialogContentText>
+          <DialogContentText className="alert-dialog-description">
+          {"Anahtarı görevliden alabilir, iade tarihine kadar geri verebilirsiniz."}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

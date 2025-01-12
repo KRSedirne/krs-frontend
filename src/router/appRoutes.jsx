@@ -7,6 +7,8 @@ import Login from "../components/auth/Login.jsx";
 import Register from "../components/auth/Register.jsx";
 import LockerPage from "../pages/LockerPage.jsx";
 import QRPage from "../pages/QRPage.jsx";
+import QRPageAdmin from "../pages/QRPageAdmin.jsx";
+import LockerPageAdmin from "../pages/LockerPageAdmin.jsx";
 
 
 const AppRoutes = () => {
@@ -19,6 +21,8 @@ const AppRoutes = () => {
             <Route path="/bblock" element={<BBlock />} />
             <Route path="/locker" element={<LockerPage/>}/>
             <Route path="/qr" element={<QRPage/>}/>
+            <Route path="/qrAdmin" element={<QRPageAdmin/>}/>
+            <Route path="/lockerAdmin" element={<LockerPageAdmin/>}/>
         </Routes>
     )
 }
