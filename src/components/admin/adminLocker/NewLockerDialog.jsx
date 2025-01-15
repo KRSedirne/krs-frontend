@@ -6,6 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Alert } from "@mui/material";
 
 export default function NewLockerDialog(props) {
   const { handleClose, open, handleNewLockerNumber, existingLockers, onCreateNewLocker } = props;
@@ -16,17 +17,17 @@ export default function NewLockerDialog(props) {
     const enteredLockerNumber = Number(lockerNumber);
 
     if (enteredLockerNumber <= 0) {
-      alert("Lütfen 1'den büyük geçerli bir dolap numarası giriniz.");
-      return;
+  <Alert variant="outlined" severity="warning">
+  Lütfen geçerli bir dolap numarası giriniz
+  </Alert> 
+   return;
     }
 
-    if (!Array.isArray(existingLockers) || existingLockers.length === 0) {
-      alert("Mevcut dolaplar verisi geçersiz veya boş.");
-      return;
-    }
 
+ 
     if (existingLockers.includes(enteredLockerNumber)) {
-      alert("Bu dolap numarası zaten var. Lütfen başka bir numara girin.");
+      <Alert variant="outlined" severity="warning">
+Bu dolap numarsı kullanılmakta lütfen geçerli bir numara giriniz.</Alert>
       return;
     }
 

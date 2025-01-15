@@ -1,12 +1,12 @@
-import { Box, Typography } from "@mui/material";
-import Locker from "../components/locker/Locker";
-import { useEffect, useState, useMemo } from "react";
-import LockerDialog from "../components/locker/LockerDialog";
+import { Alert, Box, Typography } from "@mui/material";
+import Locker from "../../components/locker/Locker";
+import { useEffect, useState } from "react";
+import LockerDialog from "../../components/locker/LockerDialog";
 import Grid from "@mui/material/Grid2";
 
-import { getLockers, reserveLocker } from "../api/locker/locker";
+import { getLockers, reserveLocker } from "../../api/locker/locker";
 import { useNavigate } from "react-router-dom";
-import Card from "../components/locker/Card";
+import Card from "../../components/locker/Card";
 
 export default function LockerPage() {
   
@@ -19,8 +19,10 @@ export default function LockerPage() {
 
   useEffect(() => {
     if (!token) {
-      alert("Lütfen giriş yapınız.");
-      navigate("/login");
+<Alert variant="outlined" severity="warning">
+Lütfen giriş yapınız.
+</Alert> 
+     navigate("/login");
     }
   }, [token, navigate]);
 
@@ -77,6 +79,7 @@ export default function LockerPage() {
       
       const id=selectedLocker._id
       await reserveLocker(id);
+      
       // setLockersData((prevLockers) =>
       //   prevLockers.map((locker) =>
       //     locker.lockerNumber === selectedLocker.lockerNumber
@@ -102,7 +105,7 @@ export default function LockerPage() {
   return (
     <Card 
     sx={{ 
-        height: "90vh", 
+        height: "84vh", 
         display: "flex", 
         flexDirection: "column" 
     }}

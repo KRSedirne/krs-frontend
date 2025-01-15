@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import { Alert, AlertTitle } from '@mui/material';
-import { adminCheckInReservation } from '../../api/reservation/QR';
+import { adminCheckInReservation } from '../../../api/admin/adminQR';
 
 export default function CameraScanner() {
     const [scanResult, setScanResult] = useState('');
@@ -57,8 +57,7 @@ export default function CameraScanner() {
             
             <p style={{ fontSize: '1.2rem' }}>QR kodunuzu buraya okutunuz.</p>
 
-            {/* Eğer kullanıcı başarılı şekilde sisteme giriş yaparsa */}
-            {user && (
+            {user && user.name && user.lastname && (
                 <Alert severity="success">
                     <AlertTitle>Hoşgeldiniz</AlertTitle>
                     {`${capitalize(user.name)} ${capitalize(user.lastname)}`}

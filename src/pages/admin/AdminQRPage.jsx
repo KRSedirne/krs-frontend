@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid2';
-import ColumnOne from "../components/qrAdmin/ColumnOne";
-import ColumnTwo from "../components/qrAdmin/ColumnTwo";
+import ColumnOne from "../../components/admin/qrAdmin/ColumnOne";
+import ColumnTwo from "../../components/admin/qrAdmin/ColumnTwo";
 import { useState } from "react";
 
 export default function QRPageAdmin() {

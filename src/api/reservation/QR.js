@@ -33,30 +33,3 @@ export const getUserbyQR= async (qrcode)=>{
     alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
   }
 }
-
-export const adminCheckInReservation = async (qrCode) => {
-  try {
-    const token = localStorage.getItem("authToken");
-      const response = await axios.post(`${BaseUrl}/admin/checkqr`, { qrCode },{
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const { userId } = response.data;
-      console.log("Kullanıcı ID'si:", userId);
-
-      if (userId) {
-          const additionalResponse = await axios.get(`${BaseUrl}/admin/user/${userId}`,{
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },} );
-
-          // Ekstra yanıtı işleyin
-          console.log("Ekstra veri alındı:", additionalResponse.data);
-          return additionalResponse.data;
-      }
-  } catch (error) {
-      console.error("Giriş işlemi sırasında hata oluştu:", error.response?.data || error.message);
-  }
-};

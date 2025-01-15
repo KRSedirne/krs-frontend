@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid2';
-import ColumnOne from "../components/qr/ColumnOne";
-import ColumnTwo from "../components/qr/ColumnTwo";
+import ColumnOne from "../../components/qr/ColumnOne";
+import ColumnTwo from "../../components/qr/ColumnTwo";
 
 export default function QRPage() {
     let boxsx={
@@ -15,7 +15,7 @@ export default function QRPage() {
       };
   return (
     <Box
-    sx={{flexGrow:1,...boxsx}}
+    sx={{flexGrow:1,...boxsx,height: "80vh"}}
     >
  
       <Grid container  sx={{justifyContent:"space-evenly"}}>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { login } from '../../api/auth/auth';
+import ForgotPasswordModal from '../modals/ForgotPasswodModal.jsx';
 import toast from 'react-hot-toast';
 import './Login.css';
+
 import {
   Container,
   TextField,
@@ -20,8 +22,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [openForgotPasswordModal, setOpenForgotPasswordModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,18 +49,6 @@ const LoginPage = () => {
     fetchData(data)
 
   };
-
-
-
-//   const handleForgotPassword = () => {
-//     // Navigate to Forgot Password page
-//     console.log('Navigate to forgot password page');
-//   };
-
-//   const handleSignUp = () => {
-//     // Navigate to Sign Up page
-//     console.log('Navigate to sign up page');
-//   };
 
   return (
     <Box className='login-container'>
@@ -125,22 +114,23 @@ const LoginPage = () => {
 
           {/* Forgot Password Link */}
           <Typography container justifyContent="space-between" sx={{ marginTop: 2 }}>
-            <Typography item>
-            <Link
-              component="button"
-              type="button"
-              variant="body2"
-              sx={{ alignSelf: 'center' }}
-            >
-              Şifremi Unuttum?
-            </Link>
-            </Typography>
+              <Typography item>
+                <Link
+                  component="button"
+                  type="button"
+                  variant="body2"
+                  sx={{ alignSelf: 'center' }}
+                  onClick={() => setOpenForgotPasswordModal(true)}
+                >
+                  Şifremi Unuttum?
+                </Link>
+              </Typography>
             <Divider sx={{padding:"20px"}} >veya</Divider>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
             <Typography sx={{ textAlign: 'center' }}>
               Hesabın Yok mu?{' '}
               <Link
-                href=""
+                href="/register"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
@@ -152,6 +142,10 @@ const LoginPage = () => {
         </form>
       </Paper>
     </Container>
+    <ForgotPasswordModal
+      isOpen={openForgotPasswordModal} // "open" yerine "isOpen" propunu kullanalım
+      handleClose={() => setOpenForgotPasswordModal(false)}  // Modal'ı kapat
+    />
     </Box>
   );
 };

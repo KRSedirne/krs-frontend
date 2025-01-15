@@ -1,15 +1,16 @@
 import { Box, Typography } from "@mui/material";
-import Locker from "../components/lockerAdmin/Locker";
+import Locker from "../../components/admin/adminLocker/Locker";
 import { useEffect, useState } from "react";
-import LockerDialog from "../components/lockerAdmin/LockerDialog";
+import LockerDialog from "../../components/admin/adminLocker/LockerDialog";
 import Grid from "@mui/material/Grid2";
-import { adminCancelLockerReservation, adminReserveLocker, expandedLocker, getLockers, reserveLocker } from "../api/locker/locker";
 import { useNavigate } from "react-router-dom";
-import Card from "../components/lockerAdmin/Card";
-import NewLockerDialog from "../components/lockerAdmin/NewLockerDialog";
-import { adminCreateLocker } from "../api/locker/locker";
-import LockerReservationDialog from "../components/lockerAdmin/LockerReservationDialog";
-import { getUserAdmin } from "../api/user/profile";
+import Card from "../../components/admin/adminLocker/Card";
+import NewLockerDialog from "../../components/admin/adminLocker/NewLockerDialog";
+import LockerReservationDialog from "../../components/admin/adminLocker/LockerReservationDialog";
+import { getUserAdmin } from "../../api/user/profile";
+import { adminCreateLocker,adminReserveLocker,adminCancelLockerReservation,adminExpandedLockerTime } from "../../api/admin/adminLocker";
+import { getLockers } from "../../api/locker/locker";
+
 
 export default function LockerPageAdmin() {
   const navigate = useNavigate();
@@ -126,7 +127,7 @@ export default function LockerPageAdmin() {
   const handleClosebySubmit = async () => {
     try {
       const id = selectedLocker._id;
-      await reserveLocker(id);
+      await adminReserveLocker(id);
 
       const data = await getLockers();
       setLockersData(data.response);
@@ -199,7 +200,7 @@ export default function LockerPageAdmin() {
   
   const handleExpand = async (lockerId) => {
     try {
-      const result = await expandedLocker(lockerId);
+      const result = await adminExpandedLockerTime(lockerId);
       console.log("Dolap genişletildi:", result);
       const data = await getLockers();
       setLockersData(data.response);
@@ -226,7 +227,7 @@ export default function LockerPageAdmin() {
   ));
 
   return (
-    <Card sx={{ height: "90vh", display: "flex", flexDirection: "column" }}>
+    <Card sx={{ height: "83vh", display: "flex", flexDirection: "column" }}>
       <LockerDialog
   handleClose={handleClose}
   expaireDate={selectedLocker ? selectedLocker.updatedAt : null} 

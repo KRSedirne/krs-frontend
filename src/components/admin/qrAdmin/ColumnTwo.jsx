@@ -11,7 +11,7 @@ export default function ColumnTwo({onState}) {
       spacing={3}
       sx={{
         alignItems: 'center',
-        height: '83vh',
+        height: '78vh',
       }}
     >
       
