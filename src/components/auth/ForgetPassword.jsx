@@ -21,21 +21,19 @@ const ForgetPasswordPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== confirmPassword) {
       return toast.error("Şifreler eşleşmemektedir.");
     }
-
+  
     try {
-      const result = await newPasswordSetting(id, password); // Şifreyi ve ID'yi gönderiyoruz
-      toast.success(result.message || "Şifre başarıyla değiştirildi!"); // API'den dönen mesajı gösterebilirsiniz
-      navigate('/'); // Başarılı işlemden sonra ana sayfaya yönlendiriyoruz
+      const result = await newPasswordSetting(id, password);
+      toast.success(result.message || "Şifre başarıyla değiştirildi!");
+      navigate('/'); // Başarılı işlemden sonra yönlendirme
     } catch (error) {
-      // Hata durumunu burada yakalıyoruz
       toast.error(error.message || "Bir hata oluştu! Şifre değiştirilemedi.");
     }
   };
-
   return (
     <Box className='login-container'>
       <Container component="main" maxWidth="xs">

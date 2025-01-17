@@ -6,7 +6,7 @@ import Register from "../components/auth/Register.jsx";
 import QRPage from "../pages/QR/QRPage.jsx";
 import Saloon from "../pages/Saloon/Saloon.jsx";
 import CreateReservationModal from "../components/modals/CreateReservationModal.jsx";
-import Layout from "../components/layout/Layout.js";
+import Layout from "../components/layout/Layout.jsx";
 import Home from "../pages/Home/HomePage.jsx";
 import AdminSaloon from "../pages/admin/AdminSaloon.jsx";
 import AdminCreateSaloonModal from "../components/admin/adminModals/AdminCreateSaloonModal.jsx";

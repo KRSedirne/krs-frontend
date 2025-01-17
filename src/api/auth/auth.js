@@ -65,14 +65,16 @@ export const newPasswordSetting = async (userId, newPassword) => {
         },
         body: JSON.stringify({ userId, newPassword }),
       });
+  
       const data = await response.json();
+  
       if (response.ok) {
-        toast.success('Şifre başarıyla sıfırlandı!');
+        return data; // Başarılı yanıtı döndür
       } else {
-        toast.error(data.message || 'Bir hata oluştu!');
+        throw new Error(data.message || 'An unknown error occurred.');
       }
     } catch (error) {
-      toast.error('Sunucu hatası: Şifre sıfırlanamadı.');
+      console.error('API Error:', error);
+      throw error; 
     }
   };
-  

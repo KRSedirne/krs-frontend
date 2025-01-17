@@ -45,16 +45,16 @@ const Sidebar = ({ onToggle }) => {
   let menuItems = [
     { to: "/home", icon: <HomeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Ana Sayfa" },
     { to: "/saloon", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Rezervasyon Yap" },
-    { to: "/qrpage", icon: <QrCodeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "QR Kod Tara" },
-    { to: "/catalog-scan", icon: <SettingsIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
-    { to: "/locker-rent", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
+    { to: "/qr", icon: <QrCodeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "QR Kod Tara" },
+    { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
+    { to: "/locker", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
   ];
   if(role==="admin"){
     menuItems=[
       { to: "/home", icon: <HomeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Ana Sayfa" },
       { to: "/adminSaloon", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Rezervasyon Yap" },
       { to: "/adminQR", icon: <QrCodeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "QR Kod Tara" },
-      { to: "/catalog-scan", icon: <SettingsIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
+      { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
       { to: "/adminLocker", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
     ];
   };
