@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getSaloonImages } from '../../api/block.js';
 import { useLocation } from 'react-router-dom';
- // getSaloonImages fonksiyonunu import et
 
 const SaloonPlan = () => {
   const location = useLocation(); 
@@ -16,7 +15,7 @@ const SaloonPlan = () => {
       try {
         const response = await getSaloonImages(saloonId); // saloonId'yi API'ye gönderiyoruz
         console.log(response);
-        setSaloonImage(response.image);
+        setSaloonImage(response.url);
         setLoading(false);
       } catch (error) {
         console.error('Image could not be fetched:', error);

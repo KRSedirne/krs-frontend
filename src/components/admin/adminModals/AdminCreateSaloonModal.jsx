@@ -10,7 +10,11 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
   const handleClose = () => setIsShowAdminCreateSaloonModal(false);
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (file) {
+      const fileURL = URL.createObjectURL(file);
+      setImage(fileURL);
+    }
   };
 
   const handleSubmit = async () => {
@@ -18,17 +22,16 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
       alert('Lütfen salon adı ve resim seçiniz!');
       return;
     }
-
-    // FormData oluşturuluyor
-    const formData = new FormData();
-    formData.append('saloonName', saloonName);
-    formData.append('image', image);
+    const requestData = {
+      saloonName: saloonName,
+      url: image,
+    };
+    console.log('requestData:', requestData);
 
     try {
-      const response = await adminAddSaloon(formData, blockId);
+      const response = await adminAddSaloon(requestData, blockId);
       console.log('Salon oluşturuldu:', response);
-      setSaloonName(response.saloonName);
-      setImage(response.image);
+
 
       setIsLoading(false)
       alert('Salon başarıyla oluşturuldu!');

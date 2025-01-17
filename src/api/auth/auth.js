@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BaseUrl } from "../constant";
+import toast from "react-hot-toast";
 
 export const login = async (data) => {
     try {
@@ -55,3 +56,23 @@ export const forgetPassword = async (data) => {
         throw error;
     }
 }
+export const newPasswordSetting = async (userId, newPassword) => {
+    try {
+      const response = await fetch(`${BaseUrl}/reset-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId, newPassword }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        toast.success('Şifre başarıyla sıfırlandı!');
+      } else {
+        toast.error(data.message || 'Bir hata oluştu!');
+      }
+    } catch (error) {
+      toast.error('Sunucu hatası: Şifre sıfırlanamadı.');
+    }
+  };
+  

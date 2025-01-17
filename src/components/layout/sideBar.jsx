@@ -28,7 +28,7 @@ const Sidebar = ({ onToggle }) => {
 
         setIsLoading(false)
       } catch (error) {
-        toast.error(error.response.data.message) // productin error message olması gerek, backend buna göre düzenlenmeli
+        toast.error(error.response.data.message)
       }
     }
     fetchData()
@@ -58,7 +58,6 @@ const Sidebar = ({ onToggle }) => {
       { to: "/adminLocker", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
     ];
   };
-
   const handleLogout = async () => {
     try {
       await logout(); 
@@ -158,7 +157,6 @@ const Sidebar = ({ onToggle }) => {
          </Box>
        </Link>
       )}
-      
 
       {/* Menü Elemanları */}
       <List>

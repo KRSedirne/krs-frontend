@@ -15,6 +15,7 @@ import SaloonPlan from "../components/saloon/SaloonPlan.jsx";
 import LockerPage from "../pages/Locker/LockerPage.jsx";
 import AdminQR from "../pages/admin/AdminQRPage.jsx";
 import AdminLockerPage from "../pages/admin/AdminLockerPage.jsx";
+import ForgetPasswordPage from "../components/auth/ForgetPassword.jsx";
 
 
 const AppRoutes = () => {
@@ -30,6 +31,8 @@ const AppRoutes = () => {
             <Route path="/locker" element={<Layout><LockerPage/></Layout>}/>
             <Route path="/saloon" element={<Layout><Saloon /></Layout>}/>
             <Route path="/qr" element={<Layout><QRPage/></Layout>}/>
+            <Route path="/reset-password/:id" element={<ForgetPasswordPage/>}/>
+
 
             {/* admin routes */}
             <Route path="/adminSaloon" element={<Layout><AdminSaloon/></Layout>} />

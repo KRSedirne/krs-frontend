@@ -1,10 +1,11 @@
 import axios from "axios";
+import { BaseUrl } from "../constant.js";
 import { UpUrl } from "../constant.js";
 
 export const adminGetAllBlocks = async () => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.get(`${UpUrl}/blocks`, {
+        const response = await axios.get(`${BaseUrl}/admin/blocks`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -18,7 +19,7 @@ export const adminGetAllBlocks = async () => {
 export const adminCreateBlock = async (blockName) => {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await axios.post(`${UpUrl}/block/create`, {
+        const response = await axios.post(`${BaseUrl}/admin/block/create`, {
             name: blockName
         }, {
             headers: {
@@ -31,18 +32,18 @@ export const adminCreateBlock = async (blockName) => {
     }
 }
 
-export const adminAddSaloon = async (formData, blockId) => {
+export const adminAddSaloon = async (responseData, blockId) => {
     try {
       const token = localStorage.getItem("authToken");
-      const response = await axios.post(`${UpUrl}/block/saloon/create/${blockId}`, formData, {
-        headers: {
+      const response = await axios.post(`${UpUrl}/block/saloon/create/${blockId}`, {
+        saloonName: responseData.saloonName,
+        url: responseData.url},
+        {headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data", // FormData gönderiminde gerekli
-        },
-      });
+        }}
+      );
       return response.data;
     } catch (error) {
       throw error;
     }
   };
-
