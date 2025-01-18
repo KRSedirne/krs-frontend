@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BaseUrl } from "../constant";
+import { BaseUrl, UpUrl } from "../constant";
 
 
 
@@ -33,6 +33,7 @@ export const reserveLocker = async (lockerId) => {
     alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
   }
 };
+
 
 
   

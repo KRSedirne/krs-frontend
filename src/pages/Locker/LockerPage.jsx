@@ -137,42 +137,43 @@ Lütfen giriş yapınız.
 
         </Grid>
 
-        {/* Box bileşenini sayfanın altına itmek için marginTop: auto eklendi */}
         <Box
-            sx={{
-                display: "flex",
-                justifyContent: "flex-start",
-                backgroundColor: "rgba(22, 22, 22, 0.14)",
-                padding: "2px",
-                marginTop: "auto",
-                alignItems:"center" ,
-                border:"3px black" 
-            }}
-        >
-          <Typography variant="body2">Lütfen kiralamak istediğiniz dolabı seçiniz.</Typography>
-          
-            <Locker
-                isDisabled={true}
-                onClick={null}
-                isBooked={false}
-                lockerNum={undefined}
-                width={25}
-                height={45}
-                fontsize={13.5}
-            />
-            <Typography variant="body2">Müsait</Typography>
+    
+>
+    {/* Yazı tamamen sola yaslanır */}
+    <Typography variant="body2" sx={{ marginRight: "auto" }}>
+        Lütfen kiralamak istediğiniz dolabı seçiniz.
+    </Typography>
 
-            <Locker
-                isDisabled={true}
-                onClick={null}
-                isBooked={true}
-                lockerNum={undefined}
-                width={25}
-                height={45}
-                fontsize={13.5}
-            />
-            <Typography variant="body2">Dolu</Typography>
-        </Box>
+    {/* Dolap 1 (Müsait) */}
+    <Box sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "20px" }}>
+        <Locker
+            isDisabled={true}
+            onClick={null}
+            isBooked={false}
+            lockerNum={undefined}
+            width={25}
+            height={45}
+            fontsize={13.5}
+        />
+        <Typography variant="body2">Müsait</Typography>
+    </Box>
+
+    {/* Dolap 2 (Dolu) */}
+    <Box sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "20px" }}>
+        <Locker
+            isDisabled={true}
+            onClick={null}
+            isBooked={true}
+            lockerNum={undefined}
+            width={25}
+            height={45}
+            fontsize={13.5}
+        />
+        <Typography variant="body2">Dolu</Typography>
+    </Box>
+</Box>
+
     </Card>
 </Card>
 

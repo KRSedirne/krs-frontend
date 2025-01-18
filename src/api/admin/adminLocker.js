@@ -69,5 +69,19 @@ export const adminCreateLocker = async (lockerNumber) => {
       alert(error.response?.data?.message || "Failed to expand lockerdate. Please try again.");
     }
   };
+  export const adminDeleteLocker=async(lockerId)=>{
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await axios.delete(`${UpUrl}/locker/delete/${lockerId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Failed to delete locker:", error);
+      alert(error.response?.data?.message || "Failed to delete locker. Please try again.");
+    }
+  }
   
   

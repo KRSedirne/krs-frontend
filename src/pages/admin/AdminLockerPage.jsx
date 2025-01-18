@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import Locker from "../../components/admin/adminLocker/Locker";
 import { useEffect, useState } from "react";
 import LockerDialog from "../../components/admin/adminLocker/LockerDialog";
@@ -8,8 +8,10 @@ import Card from "../../components/admin/adminLocker/Card";
 import NewLockerDialog from "../../components/admin/adminLocker/NewLockerDialog";
 import LockerReservationDialog from "../../components/admin/adminLocker/LockerReservationDialog";
 import { getUserAdmin } from "../../api/user/profile";
-import { adminCreateLocker,adminReserveLocker,adminCancelLockerReservation,adminExpandedLockerTime } from "../../api/admin/adminLocker";
+import { adminCreateLocker,adminReserveLocker,adminCancelLockerReservation,adminExpandedLockerTime, adminDeleteLocker } from "../../api/admin/adminLocker";
 import { getLockers } from "../../api/locker/locker";
+import { Delete } from "@mui/icons-material";
+import LockerDeleteDialog from "../../components/admin/adminLocker/LockerDeleteDialog";
 
 
 export default function LockerPageAdmin() {
@@ -18,6 +20,7 @@ export default function LockerPageAdmin() {
   const [selectedLocker, setSelectedLocker] = useState(null);
   const [lockersData, setLockersData] = useState([]);
   const [isNewLockerDialogOpen, setIsNewLockerDialogOpen] = useState(false);
+  const [isLockerDeleteDialogOpen,setIsLockerDeleteDialogOpen]=useState(false);
   const [isLockerNewReservaitonDialogOpen, setLockerNewReservationDialogOpen] = useState(false);
   const [newLockerNumber, setNewLockerNumber] = useState(null);
   const [userEmail, setUserEmail] = useState("");
@@ -106,6 +109,16 @@ export default function LockerPageAdmin() {
       console.error("Locker not found for lockerNumber:", lockerNumber);
     }
   };
+  const showModalDeleteLocker = (lockerNumber) => {
+    const locker = lockersData.find((locker) => locker.lockerNumber === lockerNumber);
+    if (locker) {
+      setSelectedLocker(locker);
+      setIsLockerDeleteDialogOpen(true);
+    } else {
+      console.error("Locker not found for lockerNumber:", lockerNumber);
+    }
+  };
+
 
   const openNewLockerDialog = () => {
     setIsNewLockerDialogOpen(true);
@@ -113,6 +126,10 @@ export default function LockerPageAdmin() {
 
   const closeNewLockerDialog = () => {
     setIsNewLockerDialogOpen(false);
+  };
+
+  const closeLockerDeleteDialog = () => {
+    setIsLockerDeleteDialogOpen(false);
   };
 
   const closeLokerReservationDialog = () => {
@@ -183,6 +200,21 @@ export default function LockerPageAdmin() {
       alert(error.message || "Dolap oluşturulurken bir hata oluştu.");
     }
   };
+  const handleDeleteLocker = async (lockerId) => {
+    try {
+      const response = await adminDeleteLocker(lockerId);
+
+      if (response) {
+        alert("Dolap başarıyla silindi!");
+        const data = await getLockers();
+        setLockersData(data.response);
+        setIsLockerDeleteDialogOpen(false); 
+      }
+    } catch (error) {
+      console.error("Dolap silinemedi:", error);
+      alert(error.message || "Dolap silerken bir hata oluştu.");
+    }
+  };
 
 
   const handleCancel = async (lockerId) => {
@@ -214,17 +246,43 @@ export default function LockerPageAdmin() {
   
   
   const lockers = sortedArray.map((locker) => (
-    <Grid item xs={2} sm={4} md={4} key={locker.lockerNumber}>
-      <Locker
-        onClick={locker.isBooked ? ()=>showModalockerReservation(locker.lockerNumber) : () => showModalNewLockerReservation(locker.lockerNumber)}
-        isBooked={locker.isBooked}
-        lockerNum={locker.lockerNumber}
-        width={50}
-        height={75}
-        fontSize={35}
-      />
-    </Grid>
-  ));
+  <Grid
+    item
+    xs={6} // Ekran genişliklerine göre boyutlandırma
+    sm={4}
+    md={3}
+    key={locker.lockerNumber}
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+     
+    }}
+  >
+    <Locker
+      onClick={
+        locker.isBooked
+          ? () => showModalockerReservation(locker.lockerNumber)
+          : () => showModalNewLockerReservation(locker.lockerNumber)
+      }
+      isBooked={locker.isBooked}
+      lockerNum={locker.lockerNumber}
+      width={50}
+      height={75}
+      fontSize={35}
+    />
+    {!locker.isBooked && (
+      <IconButton
+        onClick={()=>showModalDeleteLocker(locker.lockerNumber)}
+        aria-label="delete"
+        size="small"
+        sx={{ color: "rgb(28, 85, 123)" }}
+      >
+        <Delete />
+      </IconButton>
+    )}
+  </Grid>
+));
+
 
   return (
     <Card sx={{ height: "83vh", display: "flex", flexDirection: "column" }}>
@@ -249,13 +307,24 @@ export default function LockerPageAdmin() {
         onCreateNewLocker={handleCreateNewLocker}
      
       />
+      <LockerDeleteDialog
+        handleClose={closeLockerDeleteDialog}
+        open={isLockerDeleteDialogOpen}
+        lockerNumber={
+          selectedLocker?selectedLocker.lockerNumber:""
+        }
+        handleSubmit={() => {
+          if (selectedLocker) handleDeleteLocker(selectedLocker._id);
+        }}
+     
+      />
       <LockerReservationDialog
         handleClose={closeLokerReservationDialog}
         handleClosebySubmit={handleClosebySubmitReservation}
         open={isLockerNewReservaitonDialogOpen}
         expaireDate={Date.now()} // Passed the correct handler here
       />
-      <Card sx={{ height: "90%", flexGrow: 1, justifyContent: "space-between", display: "flex", flexDirection: "column" }}>
+      <Card sx={{ height: "90%", flexGrow: 1, justifyContent: "center", display: "flex", flexDirection: "column" }}>
         <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {lockers}
           <Locker
@@ -269,13 +338,16 @@ export default function LockerPageAdmin() {
           />
         </Grid>
 
-        <Box sx={{ display: "flex", justifyContent: "flex-start", backgroundColor: "rgba(22, 22, 22, 0.14)", padding: "2px", marginTop: "auto", alignItems: "center", border: "3px black" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-evenly", backgroundColor: "rgba(22, 22, 22, 0.14)", padding: "2px", marginTop: "auto", alignItems: "center", border: "3px solid rgba(22, 22, 22, 0.41)" }}>
           <Typography variant="body2">Lütfen kiralamak istediğiniz dolabı seçiniz.</Typography>
+          <div>
           <Locker isDisabled={true} onClick={null} isBooked={false} lockerNum={undefined} width={25} height={45} fontsize={13.5} />
           <Typography variant="body2">Müsait</Typography>
-
+          </div>
+          <div>
           <Locker isDisabled={true} onClick={null} isBooked={true} lockerNum={undefined} width={25} height={45} fontsize={13.5} />
           <Typography variant="body2">Dolu</Typography>
+          </div>
         </Box>
       </Card>
     </Card>

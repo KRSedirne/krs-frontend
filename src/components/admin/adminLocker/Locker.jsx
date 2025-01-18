@@ -66,6 +66,7 @@ export default function Locker (props)  {
   };
 
   return (
+    <div>
     <Box
     onClick={onClick}
       sx={lockerStyle}
@@ -88,5 +89,6 @@ export default function Locker (props)  {
         {isBooked!=="new"?lockerNum:null}
       </Typography>
     </Box>
+    </div>
   );
 };
