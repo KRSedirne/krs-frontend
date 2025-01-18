@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from 'react-toastify';
 import CameraScanner from './CameraScanner';
 
-export default function ColumnTwo({onState}) {
+export default function ColumnTwo({onUserUpdate}) {
   
 
   return (
@@ -15,7 +15,7 @@ export default function ColumnTwo({onState}) {
       }}
     >
       
-     <CameraScanner/>
+      <CameraScanner onUserUpdate={onUserUpdate} />
       
      
     </Stack>

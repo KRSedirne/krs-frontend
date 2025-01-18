@@ -1,70 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { Scanner } from '@yudiel/react-qr-scanner';
-import { Alert, AlertTitle } from '@mui/material';
-import { adminCheckInReservation } from '../../../api/admin/adminQR';
+import React, { useState, useEffect } from "react";
+import { Scanner } from "@yudiel/react-qr-scanner";
+import { Alert, AlertTitle } from "@mui/material";
+import { adminCheckInReservation } from "../../../api/admin/adminQR";
 
-export default function CameraScanner() {
-    const [scanResult, setScanResult] = useState('');
-    const [user, setUser] = useState({});
+export default function CameraScanner({ onUserUpdate }) {
+    const [scanResult, setScanResult] = useState("");
     const [error, setError] = useState(null);
-    const capitalize=(str)=>{
-        return str.charAt(0).toUpperCase() + str.slice(1);
-        }
 
-    // QR kodunu gönderme ve kullanıcıyı almayı sağlayan fonksiyon
+    const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
     const handleCheckIn = async (qrCode) => {
         try {
-            const userData = await adminCheckInReservation(qrCode); // adminCheckInReservation fonksiyonunu çağır
-            console.log(userData);
+            const userData = await adminCheckInReservation(qrCode);
             if (userData) {
-                setUser({name:userData.data.name,lastname:userData.data.lastname}); // Gelen kullanıcı verisini set et
-                console.log(user);
+                const user = {
+                    name: capitalize(userData.data.name),
+                    lastname: capitalize(userData.data.lastname),
+                };
+
+                onUserUpdate(user); // User bilgisini parent component'e gönderiyoruz.
+                setError(null); // Hata mesajını temizle
             }
         } catch (err) {
             console.error("QR kodu işlenirken hata oluştu:", err);
-            setError("Bir hata oluştu. Lütfen tekrar deneyin.");
+            setError(err.response?.data?.message || "Bir hata oluştu. Lütfen tekrar deneyin.");
         }
     };
 
-    // Scan işlemi tamamlandığında çalışacak fonksiyon
     const handleScan = (result) => {
-        console.log(result); // Tarama sonucunu konsola yazdır
-        if (result && result[0].rawValue) {
-            setScanResult(result[0].rawValue);  // QR kodu değerini kaydet
-        } else {
-            setScanResult('');
+        if (result && result[0]?.rawValue && result[0]?.rawValue !== scanResult) {
+            setScanResult(result[0].rawValue);
+        } else if (!result) {
+            setError("Geçersiz QR kodu. Lütfen tekrar deneyin.");
         }
     };
 
-    // QR kod tarandığında hemen backend'e gönderme
     useEffect(() => {
         if (scanResult) {
-            handleCheckIn(scanResult);  // QR kodunu backend'e gönder ve kullanıcıyı al
+            handleCheckIn(scanResult);
         }
-    }, [scanResult]);  // scanResult değiştiğinde çağrılır
+    }, [scanResult]);
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: "center" }}>
             <h1>QR Kod Tarayıcı</h1>
-            
-            <div style={{ width: '400px', height: '400px', margin: 'auto' }}>
+
+            <div style={{ width: "400px", height: "400px", margin: "auto" }}>
                 <Scanner
                     onScan={handleScan}
-                    onError={(error) => console.error(error)}
-                    style={{ width: '100%', height: '100%' }} // Scanner'ı saran div'in boyutuna göre ayar
+                    onError={(error) => console.error("Tarayıcı hatası:", error)}
+                    style={{ width: "100%", height: "100%" }}
                 />
             </div>
-            
-            <p style={{ fontSize: '1.2rem' }}>QR kodunuzu buraya okutunuz.</p>
 
-            {user && user.name && user.lastname && (
-                <Alert severity="success">
-                    <AlertTitle>Hoşgeldiniz</AlertTitle>
-                    {`${capitalize(user.name)} ${capitalize(user.lastname)}`}
-                </Alert>
-            )}
+            <p style={{ fontSize: "1.2rem" }}>QR kodunuzu buraya okutunuz.</p>
 
-            {/* Hata mesajı */}
             {error && (
                 <Alert severity="error">
                     <AlertTitle>Hata</AlertTitle>

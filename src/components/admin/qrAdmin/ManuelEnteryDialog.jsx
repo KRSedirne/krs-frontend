@@ -7,9 +7,10 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function LockerReservationDialog(props) {
+export default function ManuelEntryDialog(props) {
     const { handleClose, handleClosebySubmit, open } = props;
     const [email, setEmail] = React.useState(""); 
+    // Email state
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -22,10 +23,10 @@ export default function LockerReservationDialog(props) {
 
     return (
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" PaperProps={{ sx: { border: "5px solid rgb(28, 85, 123)" }, component: 'form', onSubmit: handleSubmit }}>
-            <DialogTitle sx={{ color: "white", backgroundColor: "rgb(28, 85, 123)" }}>DOLAP REZERVE ET</DialogTitle>
+            <DialogTitle sx={{ color: "white", backgroundColor: "rgb(28, 85, 123)" }}>Giriş İşlemi</DialogTitle>
             <DialogContent sx={{ margin: "20px 0px 0px 0px" }}>
                 <DialogContentText>
-                    Rezervasyonu atamak istediğiniz kişinin emailini giriniz...
+                Giriş yapmak isteyen kişinin emailini giriniz
                 </DialogContentText>
                 <TextField
                     autoFocus
