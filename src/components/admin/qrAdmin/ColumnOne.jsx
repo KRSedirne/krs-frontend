@@ -7,15 +7,21 @@ export default function ColumnOne({onOpenManuelDialog }){
 return(
             <Stack
             direction={'column'}
-            spacing={5}
 
              sx={{
+               backgroundColor: '#FDFDF8',
                 alignItems:"center",
-                height:"78vh",
+                height:"70vh",
             }}>    
-       <QrCodeIcon sx={{fontSize:"100px", padding:"50px 0 0 0"}}/>
+       <QrCodeIcon sx={{fontSize:"7rem", padding:"50px 5px 0px 5px",border:""}}/>
             <Button
-            onClick={onOpenManuelDialog}> Manuel Giriş</Button>
+            variant="contained"
+            onClick={onOpenManuelDialog}
+            sx={{
+                backgroundColor:"#2A3C50",
+              color:"#FDFDF8",
+              width:"%100"
+            }}> Manuel Giriş</Button>
             </Stack>     
 );
 }

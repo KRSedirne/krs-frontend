@@ -9,6 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Sidebar = ({ onToggle }) => {
+  const creme="#FDFDF8";
+  const darkBlue="#2A3C50";
+  const brown="#5D4038";
+  const golden="#F29C13";
   
   const navigate = useNavigate();
 
@@ -43,19 +47,19 @@ const Sidebar = ({ onToggle }) => {
   };
 
   let menuItems = [
-    { to: "/home", icon: <HomeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Ana Sayfa" },
-    { to: "/saloon", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Rezervasyon Yap" },
-    { to: "/qr", icon: <QrCodeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "QR Kod Tara" },
-    { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
-    { to: "/locker", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
+    { to: "/home", icon: <HomeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Ana Sayfa" },
+    { to: "/saloon", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
+    { to: "/qr", icon: <QrCodeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "QR Kodum" },
+    { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Katalog Tara" },
+    { to: "/locker", icon: <LockIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Dolap Kirala" },
   ];
   if(role==="admin"){
     menuItems=[
-      { to: "/home", icon: <HomeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Ana Sayfa" },
-      { to: "/adminSaloon", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Rezervasyon Yap" },
-      { to: "/adminQR", icon: <QrCodeIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "QR Kod Tara" },
-      { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Katalog Tara" },
-      { to: "/adminLocker", icon: <LockIcon sx={{ color: "rgba(255, 255, 255, 0.8)" }} />, text: "Dolap Kirala" },
+      { to: "/home", icon: <HomeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Ana Sayfa" },
+      { to: "/adminSaloon", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
+      { to: "/adminQR", icon: <QrCodeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "QR Kod Tara" },
+      { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: creme }} />, text: "Katalog Tara" },
+      { to: "/adminLocker", icon: <LockIcon sx={{ color:" rgba(253, 253, 242, 0.8)" }} />, text: "Dolap Kirala" },
     ];
   };
   const handleLogout = async () => {
@@ -81,8 +85,8 @@ const Sidebar = ({ onToggle }) => {
           boxSizing: "border-box",
           overflowX: "auto",
           transition: "margin-left 0.3s ease-in-out",
-          backgroundColor: "rgba(0, 0, 0, 0.6)", 
-          color: "rgba(255, 255, 255, 0.8)",
+          backgroundColor: "rgba(8, 12, 16, 0.6)", 
+          color: "rgba(253, 253, 242, 0.8)",
         },
       }}
     >
@@ -95,7 +99,7 @@ const Sidebar = ({ onToggle }) => {
           transition: "width 0.3s",
         }}
       >
-        <IconButton onClick={toggleSidebar} sx={{ color: "rgba(255, 255, 255, 0.8)" }}>
+        <IconButton onClick={toggleSidebar} sx={{ color: " rgba(253, 253, 242, 0.8)" }}>
           <MenuIcon />
         </IconButton>
       </Box>
@@ -115,7 +119,7 @@ const Sidebar = ({ onToggle }) => {
            marginBottom={2}
            marginLeft={2}
            sx={{
-             backgroundColor: "rgba(255, 255, 255, 0.1)",
+             backgroundColor: "rgba(42, 60, 80, 0.8)",
              borderRadius: "100px",
              cursor: "pointer",
              width: "250px",
@@ -126,7 +130,8 @@ const Sidebar = ({ onToggle }) => {
              sx={{
                width: 40,
                height: 40,
-               backgroundColor: "rgba(255, 255, 255, 0.8)",
+               backgroundColor: "rgba(190, 199, 213, 0.9)",
+               color:creme
                
              }}
            >
@@ -137,19 +142,19 @@ const Sidebar = ({ onToggle }) => {
            <Box
              display="flex"
              flexDirection="column"
-             alignItems="flex-start"
+             alignItems="center"
              justifyContent="center"
              ml={5}
            >
              <Typography
                variant="subtitle2" // Yazı boyutu biraz küçültüldü
-               sx={{ fontWeight: "bold", color: "rgba(255, 255, 255, 0.9)",  textTransform: 'uppercase' }}
+               sx={{ fontWeight: "bold", color: " rgba(253, 253, 242, 0.9)",  textTransform: 'uppercase' }}
              >
-               {name}{lastname}
+               {name} {lastname}
              </Typography>
              <Typography
                variant="body2"
-               sx={{marginLeft:"15px", color: "rgba(255, 255, 255, 0.6)", textDecoration: "underline" }}
+               sx={{ color: " rgba(253, 253, 242, 0.5)", textDecoration: "underline" }}
              >
                {role === "admin" ? "Admin" : "Ziyaretçi"}
              </Typography>
@@ -166,7 +171,7 @@ const Sidebar = ({ onToggle }) => {
         button
         sx={{
           "&:hover": {
-            backgroundColor: "rgba(66, 66, 66, 0.7)", // Şeffaf hover efekti
+            backgroundColor: "rgba(13, 19, 25, 0.3)", // Şeffaf hover efekti
             borderRadius: "50px", 
           },
         }}

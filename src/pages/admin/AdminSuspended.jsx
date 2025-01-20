@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,84 +7,131 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
-import Chance from 'chance';
-
-const chance = new Chance(42);
+import { adminDeleteSuspended, adminGetAllSuspendeds } from '../../api/admin/adminSuspended';
+import { Button } from '@mui/material'; // Butonları kullanmak için MUI'dan import ediyoruz
 
 const columns = [
-    { width: 100, label: 'ID', dataKey: 'id', numeric: true },
-    { width: 100, label: 'First Name', dataKey: 'firstName' },
-    { width: 100, label: 'Last Name', dataKey: 'lastName' },
-    { width: 100, label: 'Type', dataKey: 'type'},
+    { width: 100, label: 'Name', dataKey: 'name' },
+    { width: 100, label: 'Last Name', dataKey: 'lastname' },
+    { width: 100, label: 'Type', dataKey: 'type' },
     { width: 100, label: 'Description', dataKey: 'description' },
     { width: 100, label: 'Expire Time ', dataKey: 'expireTime' },
-    { width: 100, label: 'Update', dataKey: 'update' },
-    { width: 100, label: 'Delete', dataKey: 'delete' },
+    { width: 50, dataKey: 'update' },
+    { width: 50, dataKey: 'delete' },
 ];
 
-function createData(id) {
-  return {
-    id,
-    firstName: chance.first(),
-    lastName: chance.last(),
-    type: chance.sentence({ words: 1 }),
-    description: chance.sentence({ words: 10 }),
-    expireTime: chance.date({ string: true }),
-  };
-}
-
-const rows = Array.from({ length: 200 }, (_, index) => createData(index));
-
-const VirtuosoTableComponents = {
-  Scroller: React.forwardRef((props, ref) => (
-    <TableContainer component={Paper} {...props} ref={ref} />
-  )),
-  Table: (props) => (
-    <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
-  ),
-  TableHead: React.forwardRef((props, ref) => <TableHead {...props} ref={ref} />),
-  TableRow,
-  TableBody: React.forwardRef((props, ref) => <TableBody {...props} ref={ref} />),
-};
-
-const FixedHeaderContent = () => (
-  <TableRow>
-    {columns.map((column) => (
-      <TableCell
-        key={column.dataKey}
-        variant="head"
-        align={column.numeric ? 'right' : 'left'}
-        style={{ width: column.width }}
-        sx={{ backgroundColor: 'background.paper' }}
-      >
-        {column.label}
-      </TableCell>
-    ))}
-  </TableRow>
-);
-
-const RowContent = (_index, row) => (
-  <>
-    {columns.map((column) => (
-      <TableCell key={column.dataKey} align={column.numeric ? 'right' : 'left'}>
-        {row[column.dataKey]}
-      </TableCell>
-    ))}
-  </>
-);
-
 const AdminSuspended = () => {
+    const [data, setData] = useState([]);
+    
+    const handleDelete = (id) => {
+        
+        const deleteSuspended = async (id) => {
+            try {
+                const response = await adminDeleteSuspended(id);
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    return(
+        deleteSuspended(id);
+        console.log(`Delete clicked for ID: ${id}`);
+    };
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await adminGetAllSuspendeds();
+                setData(response.response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchData();
+    }, []); // data yazarsan sonsuz döngüye girer
+
+    const handleUpdate = (id) => {
+        // Update işlemine dair fonksiyonunuz burada olacak
+        console.log(`Update clicked for ID: ${id}`);
+    };
+
+    
+    const VirtuosoTableComponents = {
+        Scroller: React.forwardRef((props, ref) => (
+            <TableContainer component={Paper} {...props} ref={ref} />
+        )),
+        Table: (props) => (
+            <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
+        ),
+        TableHead: React.forwardRef((props, ref) => <TableHead {...props} ref={ref} />),
+        TableRow,
+        TableBody: React.forwardRef((props, ref) => <TableBody {...props} ref={ref} />),
+    };
+
+    const FixedHeaderContent = () => (
+        <TableRow>
+            {columns.map((column) => (
+                <TableCell
+                    key={column.dataKey}
+                    variant="head"
+                    align={column.numeric ? 'right' : 'left'}
+                    style={{ width: column.width, fontWeight: 'bold' }}
+                    sx={{ backgroundColor: 'background.paper' }}
+                >
+                    {column.label}
+                </TableCell>
+            ))}
+        </TableRow>
+    );
+
+    const RowContent = (_index, row) => (
+        <>
+            {columns.map((column) => {
+                if (column.dataKey === 'update') {
+                    return (
+                        <TableCell key={column.dataKey} align="center">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => handleUpdate(row.id)}
+                            >
+                                Update
+                            </Button>
+                        </TableCell>
+                    );
+                } else if (column.dataKey === 'delete') {
+                    return (
+                        <TableCell key={column.dataKey} align="center">
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={() => handleDelete(row.id)} // Burada delete işlemi başlatılıyor
+                            >
+                                Delete
+                            </Button>
+                        </TableCell>
+                    );
+                }
+                return (
+                    <TableCell key={column.dataKey} align={column.numeric ? 'right' : 'left'}>
+                        {row[column.dataKey]}
+                    </TableCell>
+                );
+            })}
+        </>
+    );
+
+    return (
         <Paper style={{ height: '95vh', width: '100%' }}>
             <TableVirtuoso
-                data={rows}
+                data={data}
                 components={VirtuosoTableComponents}
                 fixedHeaderContent={FixedHeaderContent}
                 itemContent={RowContent}
             />
         </Paper>
-    )
+    );
 };
 
 export default AdminSuspended;

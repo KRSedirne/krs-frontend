@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UpUrl } from "../constant";
+import toast from "react-hot-toast";
 
 
 export const adminCreateLocker = async (lockerNumber) => {
@@ -21,6 +22,7 @@ export const adminCreateLocker = async (lockerNumber) => {
   export const adminReserveLocker = async (lockerId, userEmail) => {
     try {
       const token = localStorage.getItem("authToken");
+      console.log("User email:",userEmail)
   
       const response = await axios.put(
         `${UpUrl}/locker/reservation/${lockerId}`,
@@ -32,11 +34,11 @@ export const adminCreateLocker = async (lockerNumber) => {
         }
       );
       console.log("Locker reserved:", response.data);
-      alert(response.data.message || "Locker reserved successfully!");
+      toast.success(response.data.message || "Locker reserved successfully!");
       return response.data;
     } catch (error) {
       console.error("Failed to reserve locker:", error.response ? error.response.data : error);
-      alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
+      toast.error(error.response?.data?.message || "Failed to reserve locker. Please try again.");
     }
   };
   
@@ -50,8 +52,23 @@ export const adminCreateLocker = async (lockerNumber) => {
       });
       return response.data;
     } catch (error) {
-      console.error("Failed to cancel locker:", error);
-      alert(error.response?.data?.message || "Failed to cancel locker. Please try again.");
+      console.error("Failed to find:", error);
+    }
+  };
+
+  export const adminGetLockerByEmail = async (email ) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      console.log(token);
+      const response = await axios.get(`${UpUrl}/locker/reservation/email`, {email}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Failed to find locker:", error);
+      alert(error.response?.data?.message || "Failed to find locker. Please try again.");
     }
   };
   

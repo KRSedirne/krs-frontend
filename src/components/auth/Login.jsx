@@ -57,11 +57,11 @@ const LoginPage = () => {
         <Box sx={{ display: 'flex', alignItems: "center", justifyContent: 'left', gap: 1  }}>
           <div className='login-icon-container'>
         <img
-              src="/images/image.png"
+              src="/images/transparent_logo.png"
               alt="icon" className='login-icon'
             />
         </div>
-        <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold',marginTop:"10px" }}>
+        <Typography variant="h4" align="center" gutterBottom sx={{ fontWeight: 'bold',marginTop:"10px", color:"#2A3C50"}}>
           Giriş Yap
         </Typography>
         </Box>
@@ -107,7 +107,10 @@ const LoginPage = () => {
             variant="contained"
             color="primary"
             fullWidth
-            sx={{ marginTop: 2 }}
+            sx={{ marginTop: 2,
+              backgroundColor:"#2A3C50",
+              color:"#FDFDF8"
+             }}
           >
             Giriş Yap
           </Button>
@@ -119,7 +122,7 @@ const LoginPage = () => {
                   component="button"
                   type="button"
                   variant="body2"
-                  sx={{ alignSelf: 'center' }}
+                  sx={{ alignSelf: 'center', }}
                   onClick={() => setOpenForgotPasswordModal(true)}
                 >
                   Şifremi Unuttum?

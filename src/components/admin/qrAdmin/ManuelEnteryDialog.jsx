@@ -22,11 +22,11 @@ export default function ManuelEntryDialog(props) {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" PaperProps={{ sx: { border: "5px solid rgb(28, 85, 123)" }, component: 'form', onSubmit: handleSubmit }}>
-            <DialogTitle sx={{ color: "white", backgroundColor: "rgb(28, 85, 123)" }}>Giriş İşlemi</DialogTitle>
+        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" PaperProps={{ sx: { border: "5px solid rgb(93, 64, 56)" }, component: 'form', onSubmit: handleSubmit }}>
+            <DialogTitle sx={{ color: "#FDFDF8", backgroundColor: "rgb(93, 64, 56)", justifyItems:"center",fontWeight:"bold" }}>GİRİŞ İŞLEMİ</DialogTitle>
             <DialogContent sx={{ margin: "20px 0px 0px 0px" }}>
-                <DialogContentText>
-                Giriş yapmak isteyen kişinin emailini giriniz
+                <DialogContentText sx={{color:"#2A3C50"}}>
+                Giriş yapmak isteyen kişinin emailini giriniz.
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -42,8 +42,8 @@ export default function ManuelEntryDialog(props) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>İptal</Button>
-                <Button type="submit">Onayla</Button>
+                <Button onClick={handleClose} sx={{color:"#2A3C50"}}>İptal</Button>
+                <Button type="submit" sx={{backgroundColor:"#2A3C50",color:"#FDFDF8"}}>Onayla</Button>
             </DialogActions>
         </Dialog>
     );

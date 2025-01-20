@@ -43,9 +43,12 @@ export default function CameraScanner({ onUserUpdate }) {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <h1>QR Kod Tarayıcı</h1>
+            <h1 style={{"color":"#2A3C50",
+                border:"1px solid #2A3C50",
+                borderRadius:"2px"
+            }}>QR KOD TARAYICI</h1>
 
-            <div style={{ width: "400px", height: "400px", margin: "auto" }}>
+            <div style={{ width: "53vh", height: "53vh", margin: "auto" }}>
                 <Scanner
                     onScan={handleScan}
                     onError={(error) => console.error("Tarayıcı hatası:", error)}

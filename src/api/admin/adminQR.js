@@ -27,10 +27,11 @@ export const adminCheckInReservation = async (qrCode) => {
         console.error("Giriş işlemi sırasında hata oluştu:", error.response?.data || error.message);
     }
   };
-  export const adminCheckInReservationManually = async (userEmail) => {
+  export const adminCheckInReservationManually = async (email) => {
+    console.log(email);
     try {
       const token = localStorage.getItem("authToken");
-        const response = await axios.put(`${UpUrl}/checkqr/manuel`, { userEmail },{
+        const response = await axios.put(`${UpUrl}/checkqr/manuel`, { email },{
           headers: {
             Authorization: `Bearer ${token}`,
           },

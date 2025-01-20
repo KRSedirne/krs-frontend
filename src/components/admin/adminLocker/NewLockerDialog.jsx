@@ -50,14 +50,14 @@ Bu dolap numarsı kullanılmakta lütfen geçerli bir numara giriniz.</Alert>
       component: 'form', onSubmit: handleSubmit,
 
       sx: {
-        border: "5px solid rgb(28, 85, 123)", // Kenarlık
+        border: "5px solid #F29C13", // Kenarlık
       },
     }}>
-      <DialogTitle sx={{ color: "white", backgroundColor: "rgb(28, 85, 123)" }}>
+      <DialogTitle sx={{ color: "#FDFDF8", backgroundColor: "#F29C13",fontWeight:"bold" }}>
         DOLAP EKLE
       </DialogTitle>
         <DialogContent sx={{ margin: "20px 0px 0px 0px" }}>
-          <DialogContentText>Yeni dolap numarası giriniz (1'den büyük):</DialogContentText>
+          <DialogContentText sx={{color:"rgb(42, 60, 80)"}}>Yeni dolap numarası giriniz (1'den büyük):</DialogContentText>
           <TextField
             autoFocus
             required
@@ -73,8 +73,8 @@ Bu dolap numarsı kullanılmakta lütfen geçerli bir numara giriniz.</Alert>
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>İptal</Button>
-          <Button type="submit">Onayla</Button>
+          <Button onClick={handleClose} sx={{color:"rgb(42, 60, 80)"}}>İptal</Button>
+          <Button sx={{color: "#FDFDF8", backgroundColor: "#F29C13"}} type="submit">Onayla</Button>
         </DialogActions>
 
     </Dialog>

@@ -1,6 +1,6 @@
-import { Stack, Button,TextField } from '@mui/material';
-import React, { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
+import  {Stack} from '@mui/material';
+import React from "react";
+
 import CameraScanner from './CameraScanner';
 
 export default function ColumnTwo({onUserUpdate}) {
@@ -11,7 +11,8 @@ export default function ColumnTwo({onUserUpdate}) {
       spacing={3}
       sx={{
         alignItems: 'center',
-        height: '78vh',
+        height: '70vh',
+        backgroundColor: '#FDFDF8',
       }}
     >
       

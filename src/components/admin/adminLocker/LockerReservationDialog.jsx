@@ -8,7 +8,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function LockerReservationDialog(props) {
-    const { handleClose, handleClosebySubmit, open } = props;
+    const { handleClose, handleClosebySubmit,dialogText,dialogTitle, open } = props;
     const [email, setEmail] = React.useState(""); 
 
     const handleEmailChange = (e) => {
@@ -21,11 +21,17 @@ export default function LockerReservationDialog(props) {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" PaperProps={{ sx: { border: "5px solid rgb(28, 85, 123)" }, component: 'form', onSubmit: handleSubmit }}>
-            <DialogTitle sx={{ color: "white", backgroundColor: "rgb(28, 85, 123)" }}>DOLAP REZERVE ET</DialogTitle>
+        <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm" PaperProps={{ sx: { border: "5px solid #5D4038" }, component: 'form', onSubmit: handleSubmit }}>
+            <DialogTitle sx={{ color: "#FDFDF8", backgroundColor: "#5D4038",fontWeight:"bold" }}>
+                {dialogTitle}
+                </DialogTitle>
             <DialogContent sx={{ margin: "20px 0px 0px 0px" }}>
-                <DialogContentText>
-                    Rezervasyonu atamak istediğiniz kişinin emailini giriniz...
+                <DialogContentText
+                sx={{
+                    color:"rgb(42, 60, 80)"
+                }}
+                >
+                    {dialogText}
                 </DialogContentText>
                 <TextField
                     autoFocus
@@ -41,8 +47,17 @@ export default function LockerReservationDialog(props) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose}>İptal</Button>
-                <Button type="submit">Onayla</Button>
+                <Button onClick={handleClose}
+                sx={{
+                    color:"#5D4038"
+                }}
+                >İptal</Button>
+                <Button type="submit"
+                sx={{
+                    backgroundColor:"#5D4038",
+                    color:"#FDFDF8"
+                }}
+                >Onayla</Button>
             </DialogActions>
         </Dialog>
     );

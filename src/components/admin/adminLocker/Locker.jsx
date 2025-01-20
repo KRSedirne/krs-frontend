@@ -18,11 +18,11 @@ export default function Locker (props)  {
     position: "relative",
     width: width,
     height: height,
-    backgroundColor: "#3c3c3c", 
+    backgroundColor: "#6587AD", 
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    border:"3px solid #3c3c3c ",
+    border:"3px solid #6587AD ",
     borderRadius: 1,
     margin:"1px",
   };
@@ -30,13 +30,13 @@ export default function Locker (props)  {
 
   const lockerStyleUnlocked={
     ...lockerStyle,
-    backgroundColor:"#e9e9e9",
-    border: '3px solid #574533',
+    backgroundColor:"#FDFDF8",
+    border: '3px solid #5D4038',
     borderRadius:1
   }
   const lockerStyleNew={
     ...lockerStyle,
-    border: "3px dashed rgb(28, 85, 123)", // Çizgili sınır
+    border: "3px dashed #F29C13", // Çizgili sınır
   borderRadius: 1, // Kenar yuvarlama
   margin: "1px",
   cursor: "pointer",
@@ -52,17 +52,17 @@ export default function Locker (props)  {
 
   const lockerTopology={
     position: "absolute",
-    color: "white",
+    color: "#FDFDF8",
     fontWeight: "bold",
   }
 
   const lockerUnlockedTopology={
     ...lockerTopology,
-    color:"#574533"
+    color:"#5D4038"
   }
   let plusStyle = {
     fontSize: "2rem", // Artı sembolü boyutu
-    color: "rgb(28, 85, 123)", // Sembol rengi
+    color: "#F29C13", // Sembol rengi
   };
 
   return (
@@ -76,7 +76,7 @@ export default function Locker (props)  {
         <LockIcon
           sx={{
             fontSize: fontSize,
-            color: "black",
+            color: "rgb(42, 60, 80)",
           }}
         />
       )}

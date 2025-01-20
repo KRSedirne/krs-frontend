@@ -42,32 +42,57 @@ export default function LockerDialog(props) {
         fullWidth
         maxWidth="sm"
         PaperProps={{
-          sx: { border: "5px solid rgb(28, 85, 123)" },
+          sx: { border: "5px solid #6587AD",color:"#FDFDF8" },
         }}
       >
-        <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center",backgroundColor:"rgb(28, 85, 123)",color:"white" }}>
+        <DialogTitle id="alert-dialog-title" sx={{backgroundColor:"#6587AD",color:"#FDFDF8",fontWeight:"bold" }}>
           REZERVASYON İÇİN DETAYLAR
         </DialogTitle>
         <DialogContent>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description"
+          sx={{
+            color:"rgb(42, 60, 80)"
+          }}
+          >
             Dolap Numarası: {lockerNumber}
           </DialogContentText>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description"
+          sx={{
+            color:"rgb(42, 60, 80)"
+          }}
+          >
             Dolabı Kiralayan Kişinin E-posta Adresi: {userEmail}
           </DialogContentText>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description"
+          sx={{
+            color:"rgb(42, 60, 80)"
+          }}
+          >
             Rezervasyonun Bitiş Tarihi: {formattedDate}
           </DialogContentText>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description"
+      sx={{
+            color:"rgb(42, 60, 80)"
+          }}>
             Anahtarı görevliden alabilir, iade tarihine kadar geri
             verebilirsiniz.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleExpand}>Rezervasyon Süresini Uzat</Button>
-          <Button onClick={handleCancel} autoFocus>
+          <Button onClick={handleCancel} autoFocus
+          sx={{
+            color:"rgb(42, 60, 80)"
+          }}
+          >
             Rezervasyonu İptal Et
           </Button>
+          <Button onClick={handleExpand}
+          sx={{
+            backgroundColor:"#6587AD",
+            color:"#FDFDF8",
+            fontWeight:"bold"
+          }}
+          >Rezervasyon Süresini Uzat</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

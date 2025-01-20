@@ -26,16 +26,16 @@ export default function LockerDeleteDialog(props) {
         onClose={handleClose}
         fullWidth
         maxWidth="sm"
-        PaperProps={{ sx: { border: "5px solid rgb(28, 85, 123)" }, component: 'form', onSubmit: handleSubmit }}
+        PaperProps={{ sx: { border: "5px solid rgb(42, 60, 80)" }, component: 'form', onSubmit: handleSubmit }}
       >
-        <DialogTitle id="alert-dialog-title" sx={{ textAlign: "center",backgroundColor:"rgb(28, 85, 123)",color:"white" }}>
+        <DialogTitle id="alert-dialog-title" sx={{ backgroundColor:"rgb(42, 60, 80)",color: "#FDFDF8",fontWeight:"bold" }}>
          DOLABI SİL
         </DialogTitle>
         <DialogContent>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description" sx={{marginTop:"5px",color:"rgb(42, 60, 80)"}}>
           Numarası {lockerNumber} olan dolap silinecektir.
           </DialogContentText>
-          <DialogContentText className="alert-dialog-description">
+          <DialogContentText className="alert-dialog-description" sx={{color:"rgb(42, 60, 80)"}}>
           Silmek istediğinize emin misiniz?
           </DialogContentText>
           
@@ -43,10 +43,13 @@ export default function LockerDeleteDialog(props) {
          
         </DialogContent>
         <DialogActions>
-        <Button type="submit">Onayla</Button>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={handleClose}
+        sx={{color: "rgb(42, 60, 80)"}}
+        autoFocus>
               İptal
           </Button>
+          <Button type="submit" sx={{backgroundColor:"rgb(42, 60, 80)",color: "#FDFDF8"}}>Onayla</Button>
+
         </DialogActions>
       </Dialog>
     </React.Fragment>

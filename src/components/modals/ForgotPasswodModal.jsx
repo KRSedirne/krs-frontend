@@ -45,7 +45,7 @@ const ForgetPasswordModal = ({ isOpen, handleClose }) => {
                 transform: 'translate(-50%, -50%)',
                 width: 400,
                 bgcolor: 'background.paper',
-                border: '2px solid #000',
+                border: '2px solid #F3F3D7',
                 borderRadius:1,
                 boxShadow: 24,p: 4,} }>
 
@@ -63,7 +63,7 @@ const ForgetPasswordModal = ({ isOpen, handleClose }) => {
           <CloseIcon />
         </IconButton>
 
-        <Typography variant="h6" component="h2" textAlign="center" mb={2} sx={{ fontWeight: 'bold', textDecoration:"underline", textTransform:"uppercase" }}>
+        <Typography variant="h5" component="h2" textAlign="center" mb={2} sx={{ fontWeight: 'bold', textTransform:"uppercase",color:"#2A3C50" }}>
           Şifre Sıfırlama
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -96,7 +96,7 @@ const ForgetPasswordModal = ({ isOpen, handleClose }) => {
             type="submit"
             fullWidth
             disabled={isLoading}
-            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center',backgroundColor:"#2A3C50", color:"#F3F3D7" }}
           >
             {isLoading ? <CircularProgress size={24} color="inherit" /> : 'Reset Link Gönder'}
           </Button>

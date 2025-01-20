@@ -70,7 +70,7 @@ const RegisterPage = () => {
           >
             <div className='login-icon-container'>
               <img
-                src="/images/image.png"
+                src="/images/transparent_logo.png"
                 alt="icon"
                 className='login-icon'
               />
@@ -78,13 +78,13 @@ const RegisterPage = () => {
             <Typography
               variant="h4"
               gutterBottom
-              sx={{ fontWeight: 'bold', marginTop: '10px' }}
+              sx={{ fontWeight: 'bold',marginLeft:"18px", marginTop: '10px',color:"#2A3C50" }}
             >
               Kayıt Ol
             </Typography>
           </Box>
 
-          <Typography variant="h6" align="center" sx={{ marginTop: 2, marginBottom: 3 }}>
+          <Typography variant="h6" align="center" sx={{ marginTop: 2, marginBottom: 1,color:"#2A3C50" }}>
             Lütfen Kullanıcı Bilgilerinizi Giriniz
           </Typography>
 
@@ -147,7 +147,7 @@ const RegisterPage = () => {
               variant="contained"
               color="primary"
               fullWidth
-              sx={{ marginTop: 2 }}
+              sx={{ marginTop: 2,backgroundColor:"#2A3C50",color:"#FDFDF8" }}
             >
               Kayıt Ol
             </Button>
