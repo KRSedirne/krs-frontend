@@ -18,7 +18,6 @@ export default function LockerDialog(props) {
   } = props;
 
   // Rezervasyon bitiş tarihini hesapla
-  console.log(locker);
   const formattedDate = React.useMemo(() => {
     if (!expaireDate) return "Belirtilmemiş";
     try {

@@ -56,16 +56,17 @@ export const adminCreateLocker = async (lockerNumber) => {
     }
   };
 
-  export const adminGetLockerByEmail = async (email ) => {
+  export const adminGetLockerByEmail = async (email) => {
     try {
       const token = localStorage.getItem("authToken");
       console.log(token);
-      const response = await axios.get(`${UpUrl}/locker/reservation/email`, {email}, {
+      const response = await axios.post(`${UpUrl}/locker/email`, {email}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      return response.data;
+      const secondResponse=response.data;
+      return secondResponse.response;
     } catch (error) {
       console.error("Failed to find locker:", error);
       alert(error.response?.data?.message || "Failed to find locker. Please try again.");

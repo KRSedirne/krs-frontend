@@ -15,7 +15,13 @@ return(
                 height:"83vh",
             }}>    
        <QrCodeIcon sx={{fontSize:"100px", padding:"50px 0 0 0"}}/>
-            <Button variant="contained">QR Kodum</Button>
+            <Button variant="contained"
+            sx={{
+               backgroundColor:"#2A3C50",
+             color:"#FDFDF8",
+             width:"%100"
+           }}
+            >QR Kodum</Button>
             </Stack>     
 );
 }

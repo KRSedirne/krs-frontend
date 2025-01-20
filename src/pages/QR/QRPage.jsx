@@ -15,7 +15,7 @@ export default function QRPage() {
       };
   return (
     <Box
-    sx={{flexGrow:1,...boxsx,height: "80vh"}}
+    sx={{flexGrow:1,...boxsx,height: "90vh"}}
     >
  
       <Grid container  sx={{justifyContent:"space-evenly"}}>

@@ -48,7 +48,6 @@ export default function LockerPageAdmin() {
     const fetchLockersData = async () => {
       try {
         const data = await getLockers();
-        console.log("Fetched lockers data:", data.response);
         setLockersData(data.response);
 
         if (data.response && data.response.length > 0) {

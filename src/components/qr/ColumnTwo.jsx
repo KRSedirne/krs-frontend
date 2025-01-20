@@ -16,10 +16,8 @@ export default function ColumnTwo() {
       try {
         const response = await getQRCode();
         setValue(response.qrCode)
-
-
       } catch (error) {
-        toast.error(error.response.data.message) // productin error message olması gerek, backend buna göre düzenlenmeli
+        toast.error("no reservation found") // productin error message olması gerek, backend buna göre düzenlenmeli
       }
     }
     fetchData()
@@ -89,8 +87,18 @@ export default function ColumnTwo() {
           alignItems: 'center',
         }}
       >
-        <Button onClick={handleDownload} variant="contained">QR İndir</Button>
-        <Button  onClick={handleBackToDefault} variant="contained">Sıfırla</Button>
+        <Button onClick={handleDownload} variant="contained"
+        sx={{
+          backgroundColor:"#2A3C50",
+        color:"#FDFDF8",
+        width:"%100"
+      }}>QR İndir</Button>
+        <Button  onClick={handleBackToDefault} variant="contained"
+        sx={{
+          backgroundColor:"#2A3C50",
+        color:"#FDFDF8",
+        width:"%100"
+      }}>Sıfırla</Button>
       </Stack>
     </Stack>
   );

@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid2';
-import ColumnOne from "../../components/admin/qrAdmin/ColumnOne";
-import ColumnTwo from "../../components/admin/qrAdmin/ColumnTwo";
+import ColumnOne from "../../components/admin/adminQr/ColumnOne";
+import ColumnTwo from "../../components/admin/adminQr/ColumnTwo";
 import { useState, useEffect } from "react";
 import { Alert, AlertTitle } from "@mui/material";
-import ManuelEntryDialog from "../../components/admin/qrAdmin/ManuelEnteryDialog";
+import ManuelEntryDialog from "../../components/admin/adminQr/ManuelEnteryDialog";
 import { adminCheckInReservationManually } from "../../api/admin/adminQR";
 
 export default function QRPageAdmin() {

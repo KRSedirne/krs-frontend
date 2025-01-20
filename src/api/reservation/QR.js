@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BaseUrl } from "../constant";
+import toast from "react-hot-toast";
 
 
 export const getQRCode = async () => {
@@ -15,6 +16,7 @@ export const getQRCode = async () => {
     return response.data;
   } catch (error) {
     console.error("Axios Error:", error.response || error.message);
+    toast.error("Rezervasyon bulunamadı.")
     throw error.response?.data || { message: "An error occurred." };
   }
 };
