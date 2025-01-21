@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Typography, Avatar, Box ,useMediaQuery} from "@mui/material";
-import { Menu as MenuIcon, Home as HomeIcon, Book as BookIcon, QrCode as QrCodeIcon, Lock as LockIcon, Logout, DoNotTouch } from "@mui/icons-material";
+import { Menu as MenuIcon, Home as HomeIcon, Book as BookIcon, QrCode as QrCodeIcon, Lock as LockIcon, Logout, DoNotTouch, EventSeat } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { logout } from '../../api/auth/auth.js';
 import { getProfile } from "../../api/user/profile";
@@ -48,7 +48,7 @@ const Sidebar = ({ onToggle }) => {
 
   let menuItems = [
     { to: "/home", icon: <HomeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Ana Sayfa" },
-    { to: "/saloon", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
+    { to: "/saloon", icon: <EventSeat sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
     { to: "/qr", icon: <QrCodeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "QR Kodum" },
     { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Katalog Tara" },
     { to: "/locker", icon: <LockIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Dolap Kirala" },
@@ -56,11 +56,11 @@ const Sidebar = ({ onToggle }) => {
   if(role==="admin"){
     menuItems=[
       { to: "/home", icon: <HomeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Ana Sayfa" },
-      { to: "/adminSaloon", icon: <BookIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
+      { to: "/adminSaloon", icon: <EventSeat sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Rezervasyon Yap" },
       { to: "/adminQR", icon: <QrCodeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "QR Kod Tara" },
       { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: creme }} />, text: "Katalog Tara" },
       { to: "/adminLocker", icon: <LockIcon sx={{ color:" rgba(253, 253, 242, 0.8)" }} />, text: "Dolap Kirala" },
-      { to: "/suspendad", icon: <DoNotTouch sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Engellenmiş Kullanıcılar" },
+      { to: "/adminSuspended", icon: <DoNotTouch sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Engellenmiş Kullanıcılar" },
     ];
   };
   const handleLogout = async () => {

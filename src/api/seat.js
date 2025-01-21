@@ -14,3 +14,17 @@ export const getAllSeats = async () => {
         throw error;
     }
 }
+
+export const getSeatsBySaloonId = async (saloonId) => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`${BaseUrl}/seats/saloon/${saloonId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

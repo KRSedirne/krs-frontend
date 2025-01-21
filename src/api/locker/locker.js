@@ -33,8 +33,6 @@ export const reserveLocker = async (lockerId) => {
     alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
   }
 };
-import axios from "axios";
-import { BaseUrl } from "../constant";
 export const getCurrentLockerReservation = async () => {
     try {
         const token = localStorage.getItem('authToken');

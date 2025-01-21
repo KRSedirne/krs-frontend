@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Paper } from '@mui/material';
-import { getAllBlocks } from '../api/block'; // API fonksiyonunu import ediyoruz
-import SaloonItem from '../components/saloon/SaloonItem';
+import {getAllBlocks} from '../../api/block'
+import SaloonItem from '../../components/saloon/SaloonItem';
 
 const Saloon = () => {
   const [data, setData] = useState([]);
