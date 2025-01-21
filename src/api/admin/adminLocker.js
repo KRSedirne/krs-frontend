@@ -16,7 +16,6 @@ export const adminCreateLocker = async (lockerNumber) => {
     } catch (error) {
       console.log(error);
       console.error("Failed to add locker:", error);
-      alert(error.response?.data?.message || "Failed to add locker. Please try again.");
     }
   };
   export const adminReserveLocker = async (lockerId, userEmail) => {
@@ -34,11 +33,9 @@ export const adminCreateLocker = async (lockerNumber) => {
         }
       );
       console.log("Locker reserved:", response.data);
-      toast.success(response.data.message || "Locker reserved successfully!");
       return response.data;
     } catch (error) {
       console.error("Failed to reserve locker:", error.response ? error.response.data : error);
-      toast.error(error.response?.data?.message || "Failed to reserve locker. Please try again.");
     }
   };
   
@@ -69,7 +66,6 @@ export const adminCreateLocker = async (lockerNumber) => {
       return secondResponse.response;
     } catch (error) {
       console.error("Failed to find locker:", error);
-      alert(error.response?.data?.message || "Failed to find locker. Please try again.");
     }
   };
   
@@ -84,7 +80,6 @@ export const adminCreateLocker = async (lockerNumber) => {
       return response.data;
     } catch (error) {
       console.error("Failed to expand locker date:", error);
-      alert(error.response?.data?.message || "Failed to expand lockerdate. Please try again.");
     }
   };
   export const adminDeleteLocker=async(lockerId)=>{
@@ -98,7 +93,6 @@ export const adminCreateLocker = async (lockerNumber) => {
       return response.data;
     } catch (error) {
       console.error("Failed to delete locker:", error);
-      alert(error.response?.data?.message || "Failed to delete locker. Please try again.");
     }
   }
   

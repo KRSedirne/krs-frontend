@@ -24,7 +24,7 @@ export default function LockerPageAdmin() {
   const [isLockerDeleteDialogOpen,setIsLockerDeleteDialogOpen]=useState(false);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
   const [isLockerNewReservaitonDialogOpen, setLockerNewReservationDialogOpen] = useState(false);
-  const [setNewLockerNumber] = useState(null);
+  const [newLockerNumber, setNewLockerNumber] = useState(null);
   const [lockerNumbers, setLockerNumbers] = useState([]);
   const token = localStorage.getItem("authToken");
   const [email, setEmail] = useState(null); 
@@ -163,6 +163,7 @@ export default function LockerPageAdmin() {
       const data = await getLockers();
       setLockersData(data.response);
       setLockerNewReservationDialogOpen(false);
+      toast.success(`${userEmail} emailine  ${selectedLocker.lockerNumber} numaralı dolap atanmıştır.`)
     } catch (error) {
       console.error("Failed to reserve locker:", error);
       toast.error(error.message || "Failed to reserve locker. Please try again.");
