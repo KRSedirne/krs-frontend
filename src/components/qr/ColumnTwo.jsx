@@ -1,4 +1,4 @@
-import { Stack, Button,TextField } from '@mui/material';
+import { Stack, Button,TextField, Typography } from '@mui/material';
 import QR from './QR';
 import React, { useEffect, useState } from "react";
 import { getQRCode } from '../../api/reservation/QR';
@@ -8,6 +8,10 @@ import { toast } from 'react-toastify';
 
 
 export default function ColumnTwo() {
+  const creme="#FDFDF8";
+  const darkBlue="#2A3C50";
+  const blue="#6587AD"
+  const gold="rgba(242,156,19,0.5)"
   const dummyQR="";
   const  [value,setValue]=useState("");
   useEffect(() => {
@@ -17,7 +21,7 @@ export default function ColumnTwo() {
         const response = await getQRCode();
         setValue(response.qrCode)
       } catch (error) {
-        toast.error("no reservation found") // productin error message olması gerek, backend buna göre düzenlenmeli
+        toast.error("no reservation found") 
       }
     }
     fetchData()
@@ -51,9 +55,6 @@ export default function ColumnTwo() {
   const handleBackToDefault=()=>{
     setValue(dummyQR);
   }
-    
-  
-
 
   return (
     <Stack
@@ -65,22 +66,41 @@ export default function ColumnTwo() {
     >
       <div
         style={{
-          padding: '30px 0 0 0',
+          padding: '20px 0 0 0',
         }}
       >
         <div
           style={{
-            padding: '20px',
-            outline: '5px solid black',
-            borderRadius:"15px"
+            padding: '10px',
+            outline: `5px solid ${gold}`,
+            borderRadius:"2px"
+          }}
+        >
+        <div
+          style={{
+            padding: '10px',
+            outline: `5px solid ${blue}`,
+            borderRadius:"2px"
+          }}
+        >
+        <div
+          style={{
+            padding: '10px',
+            outline: `5px solid ${darkBlue}`,
+            borderRadius:"2px"
           }}
         >
           <QR value={value} id="qrCodeQl" />
         </div>
+        </div>
+        </div>
       </div>
       <TextField  sx={{width:"400px"}} id="outlined-basic" label="QR" variant="outlined" width="300px" onChange={handleValue} value={value} />
-          <h2>Lütfen QR Kodunuzu Tarayıcıya Okutunuz</h2>
-      <Stack
+<Typography variant='h5'
+sx={{
+  color:darkBlue,
+}}> Lütfen QR kodunuzu tarayıcıya okutunuz.</Typography>
+        <Stack
         direction={'row'}
         spacing={8}
         sx={{
@@ -89,14 +109,14 @@ export default function ColumnTwo() {
       >
         <Button onClick={handleDownload} variant="contained"
         sx={{
-          backgroundColor:"#2A3C50",
-        color:"#FDFDF8",
+          backgroundColor:darkBlue,
+        color:creme,
         width:"%100"
       }}>QR İndir</Button>
         <Button  onClick={handleBackToDefault} variant="contained"
         sx={{
-          backgroundColor:"#2A3C50",
-        color:"#FDFDF8",
+          backgroundColor:darkBlue,
+        color:creme,
         width:"%100"
       }}>Sıfırla</Button>
       </Stack>

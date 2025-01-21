@@ -31,13 +31,14 @@ const AppRoutes = () => {
             <Route path="/saloon" element={<Layout><Saloon /></Layout>}/>
             <Route path="/qr" element={<Layout><QRPage/></Layout>}/>
             <Route path="/reset-password/:id" element={<ForgetPasswordPage/>}/>
+            <Route path="/saloonImage" element={<Layout><SaloonPlan/></Layout>} />
+
 
 
             {/* admin routes */}
             <Route path="/adminSaloon" element={<Layout><AdminSaloon/></Layout>} />
             <Route path="/adminres" elemnent={<Layout><AdminCreateSaloonModal/></Layout>} />
             <Route path="/adminSuspended" element={<Layout><AdminSuspended/></Layout>} />
-            <Route path="/saloonImage" element={<Layout><SaloonPlan/></Layout>} />
             <Route path="/adminQR" element={<Layout><AdminQR/></Layout>}/>
             <Route path="/adminLocker" element={<Layout><AdminLockerPage/></Layout>}/>
         </Routes>

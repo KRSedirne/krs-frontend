@@ -28,7 +28,7 @@ export const updatePassword = async (data) => {
         throw error;
     }
 }
-export const getUserAdmin = async (userId) => {
+export const adminGetUser = async (userId) => {
     try {
         const token = localStorage.getItem('authToken');
         const response = await axios.get(`${BaseUrl}/admin/user/${userId}`, {

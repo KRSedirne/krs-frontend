@@ -3,7 +3,7 @@ import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
 import { getCurrentSeatReservation } from '../../api/reservation/reservation';
 // import { getCurrentLockerReservation } from '../../api/locker/locker';
 
-const CurrentReservationItem = () => {
+const CurrentReservationItem = (props) => {
     const [seatReservation, setSeatReservation] = useState({});
     // const [lockerReservation, setLockerReservation] = useState({});
 
@@ -11,6 +11,9 @@ const CurrentReservationItem = () => {
         try {
             const response = await getCurrentSeatReservation();
             setSeatReservation(response.response);
+            if(response){
+                props.exist=true;
+            }
         } catch (error) {
             console.log(error);
         }

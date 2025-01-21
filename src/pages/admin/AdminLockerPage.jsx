@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../components/admin/adminLocker/Card";
 import NewLockerDialog from "../../components/admin/adminLocker/NewLockerDialog";
 import LockerReservationDialog from "../../components/admin/adminLocker/LockerReservationDialog";
-import { getUserAdmin } from "../../api/user/profile";
+import { adminGetUser } from "../../api/user/profile";
 import { adminCreateLocker,adminReserveLocker,adminCancelLockerReservation,adminExpandedLockerTime, adminDeleteLocker, adminGetLockerByEmail } from "../../api/admin/adminLocker";
 import { getLockers } from "../../api/locker/locker";
 import { Delete } from "@mui/icons-material";
@@ -65,7 +65,7 @@ export default function LockerPageAdmin() {
 
   const fetchEmail = async (userId) => {
     try {
-      const userData = await getUserAdmin(userId);
+      const userData = await adminGetUser(userId);
       console.log("User data fetched:", userData);  
         setEmail(userData.data.email); 
     } catch (error) {

@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SaloonItem = ({ block }) => {
+  const darkBlue="rgb(42, 60, 80)";
 
   const navigate = useNavigate();
 
@@ -14,17 +15,25 @@ const SaloonItem = ({ block }) => {
 
   return (
     <div>
-      <Typography variant="h6">{block.name}</Typography>
+      <Typography variant="h6"
+      sx={
+        {
+          color:darkBlue,
+          fontWeight:"bold",
+          backgroundColor:"rgba(242,156,19,0.2)",
+                }
+      }
+      >{block.name}</Typography>
         <List>
           {block.saloon.map((salon, idx) => (
             <ListItem key={idx}>
               <Button
-                variant="contained"
-                color="warning" 
+                variant="contained" 
                 sx={{
-                  borderRadius: '25px',
+                  borderRadius: '3px',
                   margin: '5px',
-                  width: '100%', 
+                  width: '100%',
+                  backgroundColor:darkBlue,
                 }}
                 onClick={() => handleSalonClick(salon._id)}
               >

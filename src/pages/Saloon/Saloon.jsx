@@ -4,7 +4,11 @@ import {getAllBlocks} from '../../api/block'
 import SaloonItem from '../../components/saloon/SaloonItem';
 
 const Saloon = () => {
+
+  const creme="#FDFDF8";
+
   const [data, setData] = useState([]);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +26,9 @@ const Saloon = () => {
     <Grid container spacing={2} sx={{ padding: 2 }}>
       {data?.map((block, index) => (
         <Grid item xs={4} key={index}>
-          <Paper elevation={3} sx={{ padding: 2 }}>
+          <Paper elevation={3} sx={{ padding: 2 ,
+          backgroundColor:creme
+          }}>
             <SaloonItem block={block} key={block._id}/>
           </Paper>
         </Grid>
