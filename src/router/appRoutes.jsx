@@ -25,7 +25,6 @@ const AppRoutes = () => {
             <Route path="/home" element={<Layout><Home/></Layout>} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Layout><Profile /></Layout>} />
-            <Route path="/qrpage" element={<Layout><QRPage /></Layout>}/>
             <Route path="/saloon" element={<Layout><Saloon /></Layout>}/>
             <Route path="/res" element={<CreateReservationModal/>} />
             <Route path="/locker" element={<Layout><LockerPage/></Layout>}/>

@@ -1,12 +1,16 @@
 import { Button, List, ListItem, Typography } from '@mui/material'
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SaloonItem = ({ block }) => {
 
-    // const handleSalonClick = (salonName, salonImage) => {
-    // Salon tıklama işlemi
-    // console.log(`Salon Adı: ${salonName}, Salon Resmi: ${salonImage}`);
-    // }
+  const navigate = useNavigate();
+
+  const handleSalonClick = (salonId) => {
+
+    console.log('Tıklanan salon ID:', salonId);
+    navigate(`/saloonImage?id=${salonId}`);
+  };
 
   return (
     <div>
@@ -16,13 +20,13 @@ const SaloonItem = ({ block }) => {
             <ListItem key={idx}>
               <Button
                 variant="contained"
-                color="warning" // Sarı renk için warning kullanıyoruz
+                color="warning" 
                 sx={{
-                  borderRadius: '25px', // Köşeleri kıvrımlı yapıyoruz
+                  borderRadius: '25px',
                   margin: '5px',
-                  width: '100%', // Butonun genişliğini salon ismine göre ayarlıyoruz
+                  width: '100%', 
                 }}
-                // onClick={() => handleSalonClick(salon.name, salon.image)}
+                onClick={() => handleSalonClick(salon._id)}
               >
                 {salon.saloonName}
               </Button>

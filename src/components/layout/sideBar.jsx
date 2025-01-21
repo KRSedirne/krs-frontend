@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Typography, Avatar, Box ,useMediaQuery} from "@mui/material";
-import { Menu as MenuIcon, Home as HomeIcon, Settings as SettingsIcon, Book as BookIcon, QrCode as QrCodeIcon, Lock as LockIcon, Logout } from "@mui/icons-material";
+import { Menu as MenuIcon, Home as HomeIcon, Book as BookIcon, QrCode as QrCodeIcon, Lock as LockIcon, Logout, DoNotTouch } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { logout } from '../../api/auth/auth.js';
 import { getProfile } from "../../api/user/profile";
@@ -60,6 +60,7 @@ const Sidebar = ({ onToggle }) => {
       { to: "/adminQR", icon: <QrCodeIcon sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "QR Kod Tara" },
       { to: "https://kesifaraci.com/?uid=trakya.edu.tr", icon: <BookIcon sx={{ color: creme }} />, text: "Katalog Tara" },
       { to: "/adminLocker", icon: <LockIcon sx={{ color:" rgba(253, 253, 242, 0.8)" }} />, text: "Dolap Kirala" },
+      { to: "/suspendad", icon: <DoNotTouch sx={{ color: " rgba(253, 253, 242, 0.8)" }} />, text: "Engellenmiş Kullanıcılar" },
     ];
   };
   const handleLogout = async () => {
@@ -87,6 +88,8 @@ const Sidebar = ({ onToggle }) => {
           transition: "margin-left 0.3s ease-in-out",
           backgroundColor: "rgba(8, 12, 16, 0.6)", 
           color: "rgba(253, 253, 242, 0.8)",
+          height: "100vh",
+          minHeight: "100vh",
         },
       }}
     >

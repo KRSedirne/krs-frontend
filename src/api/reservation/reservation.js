@@ -19,3 +19,16 @@ export const getReservation = async () => {
     }
 }
 
+export const getCurrentSeatReservation = async () => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`${BaseUrl}/reservation/current`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}

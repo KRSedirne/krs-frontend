@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
     setIsSidebarOpen(isOpen);
   };
   return (
-    <div className="sideBar-container" sx={{ display: "flex" }}>
+    <div className="sideBar-container" sx={{ display: "flex" ,height: "100%",minHeight: "100vh",}}>
       <Sidebar onToggle={handleSidebarToggle} />
       <Box sx={{
         flexGrow: 1,
@@ -19,6 +19,8 @@ const Layout = ({ children }) => {
         marginLeft: isSidebarOpen ? "320px" : "64px",
         padding: "20px",
         overflow: "auto",
+        height: "auto",
+        minHeight: "100vh", //
       }}>
         {children}
       </Box>

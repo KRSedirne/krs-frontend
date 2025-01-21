@@ -11,9 +11,9 @@ import { adminDeleteSuspended, adminGetAllSuspendeds } from '../../api/admin/adm
 import { Button } from '@mui/material'; // Butonları kullanmak için MUI'dan import ediyoruz
 
 const columns = [
-    { width: 100, label: 'Name', dataKey: 'name' },
-    { width: 100, label: 'Last Name', dataKey: 'lastname' },
-    { width: 100, label: 'Type', dataKey: 'type' },
+    { width: 70, label: 'Name', dataKey: 'name' },
+    { width: 70, label: 'Last Name', dataKey: 'lastname' },
+    { width: 70, label: 'Type', dataKey: 'type' },
     { width: 100, label: 'Description', dataKey: 'description' },
     { width: 100, label: 'Expire Time ', dataKey: 'expireTime' },
     { width: 50, dataKey: 'update' },
@@ -22,32 +22,31 @@ const columns = [
 
 const AdminSuspended = () => {
     const [data, setData] = useState([]);
-    
+
+    const fetchData = async () => {
+        try {
+            const response = await adminGetAllSuspendeds();
+            setData(response.response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleDelete = (id) => {
-        
         const deleteSuspended = async (id) => {
             try {
                 const response = await adminDeleteSuspended(id);
                 console.log(response);
+                fetchData();
             } catch (error) {
                 console.log(error);
             }
         };
-
         deleteSuspended(id);
         console.log(`Delete clicked for ID: ${id}`);
     };
 
-
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await adminGetAllSuspendeds();
-                setData(response.response);
-            } catch (error) {
-                console.log(error);
-            }
-        }
         fetchData();
     }, []); // data yazarsan sonsuz döngüye girer
 
@@ -125,7 +124,7 @@ const AdminSuspended = () => {
     return (
         <Paper style={{ height: '95vh', width: '100%' }}>
             <TableVirtuoso
-                data={data}
+                data={data ? data : []}
                 components={VirtuosoTableComponents}
                 fixedHeaderContent={FixedHeaderContent}
                 itemContent={RowContent}

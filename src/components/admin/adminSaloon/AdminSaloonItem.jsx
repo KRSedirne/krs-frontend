@@ -1,20 +1,15 @@
 import { Button, List, ListItem, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import SaloonPlan from '../../saloon/SaloonPlan.jsx';
 import AdminCreateSaloonModal from '../adminModals/AdminCreateSaloonModal';
 import { useNavigate } from 'react-router-dom';
 const AdminSaloonItem = ({ block }) => {
 
     const [isShowAdminCreateSaloonModal, setIsShowAdminCreateSaloonModal] = useState(false);
-    const [selectedSaloonId, setSelectedSaloonId] = useState(null);
-    const [showSaloonPlan, setShowSaloonPlan] = useState(false);
 
     const navigate = useNavigate();
 
     const handleSalonClick = (salonId) => {
-        setSelectedSaloonId(salonId); // Tıklanan salonun ID'sini kaydet
         console.log('Tıklanan salon ID:', salonId);
-        setShowSaloonPlan(true);
         navigate(`/saloonImage?id=${salonId}`); // Query parametre ile salon ID'sini geçir
     };
 
@@ -46,4 +41,4 @@ const AdminSaloonItem = ({ block }) => {
   )
 }
 
-export default AdminSaloonItem
+export default AdminSaloonItem;
