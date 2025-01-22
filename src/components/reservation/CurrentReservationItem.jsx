@@ -11,8 +11,10 @@ const CurrentReservationItem = (props) => {
         try {
             const response = await getCurrentSeatReservation();
             setSeatReservation(response.response);
+            console.log(response.response);
             if(response){
                 props.exist=true;
+                console.log(props.exist);
             }
         } catch (error) {
             console.log(error);

@@ -34,25 +34,28 @@ export default function QRPageAdmin() {
     };
 
     const handleUserUpdate = (userData) => {
-        setUser({ name: capitalize(userData.data.name), lastname: capitalize(userData.data.lastname) });
+        console.log(userData);
+        console.log({ name: capitalize(userData.name), lastname: capitalize(userData.lastname) });
+        setUser({ name: capitalize(userData.name), lastname: capitalize(userData.lastname) });
         console.log(user);
     };
 
     const handleManuelCheckIn = async (data) => {
         console.log("data:", data);
-        const user = await adminCheckInReservationManually(data);
-        handleUserUpdate(user);
+        const userData = await adminCheckInReservationManually(data);
+        handleUserUpdate(userData.data);
         handleClose();
     };
 
-    // Alert'i 10 saniye sonra kapatma
+ 
     useEffect(() => {
         if (user) {
+            console.log("user in useEffect:",user);
             const timer = setTimeout(() => {
-                setUser(null); // Kullanıcıyı sıfırlayarak Alert'i kapat
+                setUser(null);
             }, 10000);
 
-            return () => clearTimeout(timer); // Bileşen yeniden render edilirse timer'ı temizle
+            return () => clearTimeout(timer); 
         }
     }, [user]);
 

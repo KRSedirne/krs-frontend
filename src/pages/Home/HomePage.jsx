@@ -34,7 +34,7 @@ const handleExistComponent=(data)=>setExist(data);
       </Typography>
 
       {/* CurrentReservationItem bileşeni */}
-      {exist?<CurrentReservationItem exist={handleExistComponent}/>:null}
+    <CurrentReservationItem exist={handleExistComponent}/>
     </Box>
   );
 };

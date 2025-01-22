@@ -4,16 +4,31 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, T
 
 const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,saloonId}) => {
   const [saloonName, setSaloonName] = useState('');
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
 
   const handleClose = () => setIsShowAdminCreateSaloonModal(false);
 
-  const handleImageChange = (e) => {
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const fileURL = URL.createObjectURL(file);
-      setImage(fileURL);
+      try {
+        const base64Image = await convertToBase64(file);
+        setImage(base64Image);
+      } catch (error) {
+        console.error("Error converting image to Base64:", error);
+      }
     }
   };
 
@@ -25,13 +40,14 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
     const requestData = {
       saloonName: saloonName,
       url: image,
+      width: parseInt(width, 10),
+      height: parseInt(height, 10),
     };
     console.log('requestData:', requestData);
 
     try {
       const response = await adminAddSaloon(requestData, blockId);
       console.log('Salon oluşturuldu:', response);
-
 
       setIsLoading(false)
       alert('Salon başarıyla oluşturuldu!');
@@ -60,6 +76,20 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
             fullWidth
             value={saloonName}
             onChange={(e) => setSaloonName(e.target.value)}
+            sx={{ marginBottom: 2 }}
+          />
+           <TextField
+            label="Resim Genişliği"
+            fullWidth
+            value={width}
+            onChange={(e) => setWidth(e.target.value)}
+            sx={{ marginBottom: 2 }}
+          />
+          <TextField
+            label="Resim Yüksekliği"
+            fullWidth
+            value={height}
+            onChange={(e) => setHeight(e.target.value)}
             sx={{ marginBottom: 2 }}
           />
           <Typography variant="body2" sx={{ marginBottom: 1 }}>

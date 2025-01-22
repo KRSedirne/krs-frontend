@@ -50,11 +50,7 @@ const AdminSuspended = () => {
         fetchData();
     }, []); // data yazarsan sonsuz döngüye girer
 
-    const handleUpdate = (id) => {
-        // Update işlemine dair fonksiyonunuz burada olacak
-        console.log(`Update clicked for ID: ${id}`);
-    };
-
+ 
     
     const VirtuosoTableComponents = {
         Scroller: React.forwardRef((props, ref) => (
@@ -87,19 +83,7 @@ const AdminSuspended = () => {
     const RowContent = (_index, row) => (
         <>
             {columns.map((column) => {
-                if (column.dataKey === 'update') {
-                    return (
-                        <TableCell key={column.dataKey} align="center">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => handleUpdate(row.id)}
-                            >
-                                Update
-                            </Button>
-                        </TableCell>
-                    );
-                } else if (column.dataKey === 'delete') {
+                 if (column.dataKey === 'delete') {
                     return (
                         <TableCell key={column.dataKey} align="center">
                             <Button

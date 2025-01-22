@@ -19,11 +19,11 @@ export default function Locker (props)  {
     position: "relative",
     width: width,
     height: height,
-    backgroundColor: "#3c3c3c", 
+    backgroundColor: "#6587AD",  
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    border:"3px solid #3c3c3c ",
+    border:"3px solid #6587AD ",
     borderRadius: 1,
     margin:"1px",
     cursor: isDisabled ? "not-allowed" : "pointer", // Kullanılabilirlik kontrolü
@@ -31,21 +31,21 @@ export default function Locker (props)  {
 
   let lockerStyleUnlocked={
     ...lockerStyle,
-    backgroundColor:"#e9e9e9",
-    border: '3px solid #574533',
+    backgroundColor:"#FDFDF8",
+    border: '3px solid #5D4038',
     borderRadius:1
   }
 
   let lockerTopology={
     position: "absolute",
-    color: "white",
+    color: "#FDFDF8",
     fontWeight: "bold",
     fontSize:fontSize
   }
 
   let lockerUnlockedTopology={
     ...lockerTopology,
-    color:"#574533", 
+    color:"#5D4038",
        fontSize:fontSize
 
   }
@@ -60,7 +60,7 @@ export default function Locker (props)  {
         <LockIcon
           sx={{
             fontSize: fontSize,
-            color: "black",
+            color: "rgb(42, 60, 80)",
           }}
         />
       )}

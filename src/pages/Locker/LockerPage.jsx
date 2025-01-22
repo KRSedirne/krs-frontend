@@ -1,4 +1,4 @@
-import { Alert, Box, Typography } from "@mui/material";
+import { Alert, Box, Pagination, Typography } from "@mui/material";
 import Locker from "../../components/locker/Locker";
 import { useEffect, useState } from "react";
 import LockerDialog from "../../components/locker/LockerDialog";
@@ -10,12 +10,16 @@ import Card from "../../components/locker/Card";
 
 export default function LockerPage() {
   
+  
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [selectedLocker, setSelectedLocker] = useState(null);
   const [lockersData, setLockersData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
   const token = localStorage.getItem("authToken");
+  const itemsPerPage =52;
 
   useEffect(() => {
     if (!token) {
@@ -40,11 +44,19 @@ Lütfen giriş yapınız.
     };
     fetchLockersData();
   }, []);
+  const handlePageChange = (event,value) => {
+    setCurrentPage(value);
+  };
+  
 
   
  
   const sortedArray = Array.isArray(lockersData) ? lockersData.sort((a, b) => a.lockerNumber - b.lockerNumber) : [];
-  let lockers = sortedArray.map((locker) => (
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentLockers = sortedArray.slice(startIndex, startIndex + itemsPerPage);
+
+
+  let lockers = currentLockers.map((locker) => (
     <Grid item xs={2} sm={4} md={4} key={locker.lockerNumber}>
       <Locker
         isDisabled={locker.isBooked}
@@ -103,79 +115,53 @@ Lütfen giriş yapınız.
  
 
   return (
-    <Card 
-    sx={{ 
-        height: "84vh", 
-        display: "flex", 
-        flexDirection: "column" 
-    }}
->
-    <LockerDialog
+      <Card sx={{ height: "83vh", display: "flex", flexDirection: "column", backgroundColor:"#FDFDF8" }}>
+        <LockerDialog
         handleClose={handleClose}
         handleClosebySubmit={handleClosebySubmit}
         expaireDate={Date.now()}
         open={open}
     />
-
-    {/* Grid bileşeninin içeriğini dikeyde ortalamak için justifyContent kullanıldı */}
-    <Card 
-        sx={{ 
-            height: "90%", 
-            flexGrow: 1, 
-            justifyContent: "space-between", /* Dikeyde boşluk bırakma */
-            display: "flex",  
-            flexDirection: "column" /* Tekrar flexDirection eklendi */
-        }}
-    >
-        <Grid
-            container
-            spacing={{ xs: 1, md: 2 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-        >
+        <Card sx={{ height: "90%", flexGrow: 1, justifyContent: "center", display: "flex", flexDirection: "column", backgroundColor:"#FDFDF8" }}>
+          <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             {lockers}
-           
-
-        </Grid>
-
-        <Box
-    
->
-    {/* Yazı tamamen sola yaslanır */}
-    <Typography variant="body2" sx={{ marginRight: "auto" }}>
-        Lütfen kiralamak istediğiniz dolabı seçiniz.
-    </Typography>
-
-    {/* Dolap 1 (Müsait) */}
-    <Box sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "20px" }}>
-        <Locker
-            isDisabled={true}
-            onClick={null}
-            isBooked={false}
-            lockerNum={undefined}
-            width={25}
-            height={45}
-            fontsize={13.5}
+            
+          </Grid>
+          <div style={{padding:"10px 0 0 0"}}>
+          <Pagination
+          count={Math.ceil(lockersData.length / itemsPerPage)} // Toplam sayfa sayısı
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
         />
-        <Typography variant="body2">Müsait</Typography>
-    </Box>
-
-    {/* Dolap 2 (Dolu) */}
-    <Box sx={{ display: "flex", alignItems: "center", gap: "5px", marginLeft: "20px" }}>
-        <Locker
-            isDisabled={true}
-            onClick={null}
-            isBooked={true}
-            lockerNum={undefined}
-            width={25}
-            height={45}
-            fontsize={13.5}
-        />
-        <Typography variant="body2">Dolu</Typography>
-    </Box>
-</Box>
-
-    </Card>
-</Card>
-
-  );
+        </div>
+          <Box sx={{ display: "flex", justifyContent: "space-between", backgroundColor: "rgb(42, 60, 80,0.2)", padding: "2px", marginTop: "auto", alignItems: "center", border: "3px solid rgb(42, 60, 80,0.4)" }}>
+            <Typography 
+            sx={{
+              color:"#5D4038",
+              fontWeight:"bold"
+            }}
+            variant="body2">Lütfen kiralamak istediğiniz dolabı seçiniz.</Typography>
+            <div style={ {"display":"flex"}}>
+            <div style={ {"padding":"0 5px"}}>
+            <Locker isDisabled={true} onClick={null} isBooked={false} lockerNum={undefined} width={25} height={45} fontsize={13.5} />
+            <Typography 
+            sx={{
+              color:"#5D4038"
+            }}
+            variant="body2">Müsait</Typography>
+            </div>
+            <div>
+            <Locker isDisabled={true} onClick={null} isBooked={true} lockerNum={undefined} width={25} height={45} fontsize={13.5} />
+            <Typography 
+            sx={{
+              color:"#5D4038"
+            }}
+            variant="body2">Dolu</Typography>
+            </div>
+            </div>
+          </Box>
+        </Card>
+      </Card>
+    );
 }
