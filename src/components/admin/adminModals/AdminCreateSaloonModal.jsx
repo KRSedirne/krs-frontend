@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { adminAddSaloon } from '../../../api/admin/adminBlock.js';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Typography } from '@mui/material';
+import toast from 'react-hot-toast';
 
 const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,saloonId}) => {
   const [saloonName, setSaloonName] = useState('');
@@ -50,10 +51,12 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
       console.log('Salon oluşturuldu:', response);
 
       setIsLoading(false)
-      alert('Salon başarıyla oluşturuldu!');
+      handleClose();
+      
+      toast.success('Salon başarıyla oluşturuldu!');
     } catch (error) {
       console.error('Error creating saloon:', error);
-      alert('Bir hata oluştu, lütfen tekrar deneyin!');
+      toast.error('Salon oluşturulurken bir hata oluştu!');
     }
   };
 

@@ -24,7 +24,7 @@ export default function LockerPageAdmin() {
   const [isLockerDeleteDialogOpen,setIsLockerDeleteDialogOpen]=useState(false);
   const [isSearchDialogOpen, setIsSearchDialogOpen] = useState(false);
   const [isLockerNewReservaitonDialogOpen, setLockerNewReservationDialogOpen] = useState(false);
-  const [setNewLockerNumber] = useState(null);
+  const [newLockerNumber,setNewLockerNumber] = useState(null);
   const [lockerNumbers, setLockerNumbers] = useState([]);
   const token = localStorage.getItem("authToken");
   const [email, setEmail] = useState(null); 

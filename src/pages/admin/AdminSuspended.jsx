@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import { adminDeleteSuspended, adminGetAllSuspendeds } from '../../api/admin/adminSuspended';
 import { Button } from '@mui/material'; // Butonları kullanmak için MUI'dan import ediyoruz
-import { adminGetUser } from '../../api/user/profile';
 
 const columns = [
     { width: 70, label: 'Name', dataKey: 'name' },
@@ -17,30 +16,16 @@ const columns = [
     { width: 70, label: 'Type', dataKey: 'type' },
     { width: 100, label: 'Description', dataKey: 'description' },
     { width: 100, label: 'Expire Time ', dataKey: 'expireTime' },
-    { width: 50, dataKey: 'update' },
     { width: 50, dataKey: 'delete' },
 ];
 
 const AdminSuspended = () => {
-    const [suspendedData, setSuspendedData] = useState([]);
-    const [data,setData]=useState([]);
-    const [userData,setUserData]=useState(null);
-    const [usersData,setUsersData]=useState([]);
+    const [data, setData] = useState([]);
 
     const fetchData = async () => {
         try {
             const response = await adminGetAllSuspendeds();
-            setSuspendedData(response.response);
-            console.log(suspendedData);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    const fetchUserData = async (id) => {
-        try {
-            const response = await adminGetUser(id);
-            setUserData(response);
-            console.log(response);
+            setData(response.response);
         } catch (error) {
             console.log(error);
         }
@@ -62,15 +47,7 @@ const AdminSuspended = () => {
 
     useEffect(() => {
         fetchData();
-        const userList=suspendedData.map((suspended)=>{
-            setUserData(fetchUserData(suspended.user))
-        })
-        console.log(userList);
-        
-        
-        
     }, []); // data yazarsan sonsuz döngüye girer
-
 
     
     const VirtuosoTableComponents = {
@@ -104,8 +81,7 @@ const AdminSuspended = () => {
     const RowContent = (_index, row) => (
         <>
             {columns.map((column) => {
-            
-               if (column.dataKey === 'delete') {
+                if (column.dataKey === 'delete') {
                     return (
                         <TableCell key={column.dataKey} align="center">
                             <Button
@@ -130,7 +106,7 @@ const AdminSuspended = () => {
     return (
         <Paper style={{ height: '95vh', width: '100%' }}>
             <TableVirtuoso
-                data={suspendedData ? suspendedData : []}
+                data={data ? data : []}
                 components={VirtuosoTableComponents}
                 fixedHeaderContent={FixedHeaderContent}
                 itemContent={RowContent}

@@ -10,17 +10,18 @@ const AdminSaloon = () => {
   const [data, setData] = useState([]);
   const [isShowAdminCreateBlockModal, setIsShowAdminCreateBlockModal] = useState(false);
 
+  const fetchData = async () => {
+    try {
+      const response = await adminGetAllBlocks();
+      setData(response.blocks);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await adminGetAllBlocks();
-        setData(response.blocks);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();  
-  }, [isShowAdminCreateBlockModal]);
+    fetchData();
+  }, []);
 
   return (
         <Grid container spacing={2} sx={{ padding: 2 }}>
@@ -51,7 +52,8 @@ const AdminSaloon = () => {
             <AdminCreateBlockItem />
         </Button>
         {isShowAdminCreateBlockModal && (
-            <AdminCreateBlockModal setIsShowAdminCreateBlockModal={setIsShowAdminCreateBlockModal} />
+            <AdminCreateBlockModal setIsShowAdminCreateBlockModal={setIsShowAdminCreateBlockModal}
+             />
         )}
     </Grid>
   );

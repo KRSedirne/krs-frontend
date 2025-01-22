@@ -30,3 +30,18 @@ export const getSaloonImages = async (saloonId) => {
     }
 };
 
+export const getBlockDetails = async (blockId) => {
+    try {
+        const token = localStorage.getItem('authToken');
+        const response = await axios.get(`${BaseUrl}/block/${blockId}`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
