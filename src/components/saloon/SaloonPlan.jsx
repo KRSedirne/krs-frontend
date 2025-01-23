@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { getSaloonImages } from '../../api/block.js';
 import { getSeatsBySaloonId } from '../../api/seat.js';
 import { useLocation } from 'react-router-dom';
