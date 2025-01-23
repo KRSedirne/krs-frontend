@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
 import { getBlockDetails } from '../../api/block';
 import { createReservation } from '../../api/reservation/reservation';
+import toast from 'react-hot-toast';
 
-const CreateReservationModal = ({ open, onClose, seat }) => {
+const CreateReservationModal = ({ open, onClose, seat, setIsReservationSuccess }) => {
   const [blockName, setBlockName] = useState(''); 
   const [loading, setLoading] = useState(false); 
 
@@ -18,10 +19,11 @@ const CreateReservationModal = ({ open, onClose, seat }) => {
 
       // Rezervasyon API çağrısı
       const response = await createReservation(reservationData);
-      alert(response.message || 'Reservations created successfully.');
+      toast(response.message || 'Reservations created successfully.');
       onClose(); // Modal'ı kapat
+      setIsReservationSuccess(true);
     } catch (error) {
-      alert(error.response?.data?.message || 'Reservation could not be created.');
+      toast(error.response?.data?.message || 'Reservation could not be created.');
     } finally {
       setLoading(false);
     }
@@ -47,6 +49,7 @@ const CreateReservationModal = ({ open, onClose, seat }) => {
 
     fetchBlockName();
   }, [seat]);
+
 
   return (
       <Dialog 
@@ -87,3 +90,6 @@ const CreateReservationModal = ({ open, onClose, seat }) => {
 };
 
 export default CreateReservationModal;
+
+
+

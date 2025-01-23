@@ -1,10 +1,11 @@
-import React, { useEffect, useState} from 'react';
+import React, { use, useEffect, useState} from 'react';
 import { getSaloonImages } from '../../api/block.js';
 import { getSeatsBySaloonId } from '../../api/seat.js';
 import { useLocation } from 'react-router-dom';
 import { Box, Button, CircularProgress } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import CreateReservationModal from '../modals/CreateReservationModal';
+import toast from 'react-hot-toast';
 
 const SaloonPlan = () => {
   const location = useLocation(); 
@@ -14,6 +15,7 @@ const SaloonPlan = () => {
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
   const [selectedSeat, setSelectedSeat] = useState(null); 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isReservationSuccess, setIsReservationSuccess] = useState(false);
 
   const queryParams = new URLSearchParams(location.search);
   const saloonId = queryParams.get('id');
@@ -46,13 +48,17 @@ const SaloonPlan = () => {
       setSeats(normalizedSeats); 
 
       setLoading(false);
+      if (isReservationSuccess) {
+          setIsReservationSuccess(false);
+        }
       } catch (error) {
         console.error('Image could not be fetched:', error);
         setLoading(false);
       }
     };
     fetchData();
-  }, [saloonId]); 
+  }, [saloonId, isReservationSuccess]); 
+  
 
   if (loading) {
     return (
@@ -97,9 +103,8 @@ const SaloonPlan = () => {
     {seats.map((seat, index) => (
         <Button
           key={index}
-          onClick={() => handleSeatClick(seat)}
+          onClick={() =>  !seat.isBooked && handleSeatClick(seat)} 
           variant="contained"
-          color={seat.isBooked ? 'error' : 'primary'} 
           disabled={seat.isBooked}
           sx={{
             position: 'absolute',
@@ -114,11 +119,11 @@ const SaloonPlan = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            backgroundColor: seat.isBooked ? 'red' : 'green',
             fontSize: '15px',
             fontWeight: 'bold', 
           }}
           >
-            {seat.isBooked && <LockIcon  sx={{color:"purple", marginRight: '1px' }}/>}
             {seat.seatNumber}
           </Button>
       ))}
@@ -126,6 +131,7 @@ const SaloonPlan = () => {
         open={isModalOpen}
         onClose={handleCloseModal}
         seat={selectedSeat}
+        setIsReservationSuccess={setIsReservationSuccess}
       />
   </Box>
 );

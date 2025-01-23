@@ -3,7 +3,7 @@ import Locker from "../../components/locker/Locker";
 import { useEffect, useState } from "react";
 import LockerDialog from "../../components/locker/LockerDialog";
 import Grid from "@mui/material/Grid2";
-
+import toast from "react-hot-toast";
 import { getLockers, reserveLocker } from "../../api/locker/locker";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/locker/Card";
@@ -35,7 +35,7 @@ Lütfen giriş yapınız.
         setLockersData(data.response);
       } catch (error) {
         console.error("Locker data couldn't be reached:", error);
-        alert(error.message || "Failed to load locker data. Please try again.");
+        toast.error(error.message || "Failed to load locker data. Please try again.");
       }
     };
     fetchLockersData();
@@ -92,7 +92,7 @@ Lütfen giriş yapınız.
       setOpen(false);
     } catch (error) {
       console.error("Failed to reserve locker:", error);
-      alert(error.message || "Failed to reserve locker. Please try again.");
+      toast.error(error.message || "Failed to reserve locker. Please try again.");
     }
   };
 

@@ -35,7 +35,7 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
 
   const handleSubmit = async () => {
     if (!saloonName || !image) {
-      alert('Lütfen salon adı ve resim seçiniz!');
+      toast.error('Lütfen tüm alanları doldurun!');
       return;
     }
     const requestData = {
