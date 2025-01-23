@@ -12,7 +12,7 @@ return(
 
              sx={{
                 alignItems:"center",
-                height:"83vh",
+                height:"78vh",
             }}>    
        <QrCodeIcon sx={{fontSize:"100px", padding:"50px 0 0 0"}}/>
             <Button variant="contained"

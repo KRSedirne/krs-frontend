@@ -16,6 +16,7 @@ import LockerPage from "../pages/Locker/LockerPage.jsx";
 import AdminQR from "../pages/admin/AdminQRPage.jsx";
 import AdminLockerPage from "../pages/admin/AdminLockerPage.jsx";
 import ForgetPasswordPage from "../components/auth/ForgetPassword.jsx";
+import AdminBlockPage from "../pages/admin/AdminBlockPage.jsx";
 
 
 const AppRoutes = () => {
@@ -41,6 +42,8 @@ const AppRoutes = () => {
             <Route path="/adminSuspended" element={<Layout><AdminSuspended/></Layout>} />
             <Route path="/adminQR" element={<Layout><AdminQR/></Layout>}/>
             <Route path="/adminLocker" element={<Layout><AdminLockerPage/></Layout>}/>
+            <Route path="/adminBlock" element={<Layout><AdminBlockPage/></Layout>}/>
+
         </Routes>
     )
 }

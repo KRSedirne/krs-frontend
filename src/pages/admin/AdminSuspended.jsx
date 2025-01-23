@@ -11,12 +11,11 @@ import { adminDeleteSuspended, adminGetAllSuspendeds } from '../../api/admin/adm
 import { Button } from '@mui/material'; // Butonları kullanmak için MUI'dan import ediyoruz
 
 const columns = [
-    { width: 70, label: 'Name', dataKey: 'name' },
-    { width: 70, label: 'Last Name', dataKey: 'lastname' },
-    { width: 70, label: 'Type', dataKey: 'type' },
-    { width: 100, label: 'Description', dataKey: 'description' },
-    { width: 100, label: 'Expire Time ', dataKey: 'expireTime' },
-    { width: 50, dataKey: 'update' },
+    { width: 70, label: 'Ad', dataKey: 'name' },
+    { width: 70, label: 'Soyad', dataKey: 'lastname' },
+    { width: 70, label: 'Ceza Tipi', dataKey: 'type' },
+    { width: 100, label: 'Açıklama', dataKey: 'description' },
+    { width: 100, label: 'Bitiş Tarihi ', dataKey: 'expireTime' },
     { width: 50, dataKey: 'delete' },
 ];
 
@@ -88,10 +87,12 @@ const AdminSuspended = () => {
                         <TableCell key={column.dataKey} align="center">
                             <Button
                                 variant="contained"
-                                color="secondary"
+                                sx={{color:'FDFDF8',
+                                    fontWeight:"bold",
+                                    backgroundColor:'#2A3C50'}}
                                 onClick={() => handleDelete(row.id)} // Burada delete işlemi başlatılıyor
                             >
-                                Delete
+                                Sil
                             </Button>
                         </TableCell>
                     );

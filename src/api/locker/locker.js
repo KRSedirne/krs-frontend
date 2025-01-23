@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BaseUrl, UpUrl } from "../constant";
+import toast from "react-hot-toast";
 
 
 
@@ -30,7 +31,7 @@ export const reserveLocker = async (lockerId) => {
     return response.data;
   } catch (error) {
     console.error("Failed to reserve locker:", error);
-    alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
+    toast.error("Dolap rezerve edilemedi.");
   }
 };
 export const getCurrentLockerReservation = async () => {

@@ -12,12 +12,11 @@ export const getQRCode = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response)
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Axios Error:", error.response || error.message);
     toast.error("Rezervasyon bulunamadı.")
-    throw error.response?.data || { message: "An error occurred." };
   }
 };
 export const getUserbyQR= async (qrcode)=>{
@@ -32,6 +31,6 @@ export const getUserbyQR= async (qrcode)=>{
     return response.data;
   } catch (error) {
     console.error("Failed to reserve locker:", error);
-    alert(error.response?.data?.message || "Failed to reserve locker. Please try again.");
+    console.log(error.response?.data?.message || "Failed to reserve locker. Please try again.");
   }
 }

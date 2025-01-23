@@ -43,23 +43,24 @@ export default function LockerPageAdmin() {
       navigate("/login");
     }
   }, [token, navigate]);
+  const fetchLockersData = async () => {
+    try {
+      const data = await getLockers();
+      setLockersData(data.response);
+
+      if (data.response && data.response.length > 0) {
+        setLockerNumbers(data.response.map((locker) => locker.lockerNumber));
+      } else {
+        setLockerNumbers([]); 
+      }
+    } catch (error) {
+      console.error("Locker data couldn't be reached:", error);
+      toast.error("Dolaplar yüklenemedi");
+    }
+  };
 
   useEffect(() => {
-    const fetchLockersData = async () => {
-      try {
-        const data = await getLockers();
-        setLockersData(data.response);
-
-        if (data.response && data.response.length > 0) {
-          setLockerNumbers(data.response.map((locker) => locker.lockerNumber));
-        } else {
-          setLockerNumbers([]); 
-        }
-      } catch (error) {
-        console.error("Locker data couldn't be reached:", error);
-        toast.error(error.message || "Failed to load locker data. Please try again.");
-      }
-    };
+    
     fetchLockersData();
   }, []); 
 
@@ -130,9 +131,6 @@ export default function LockerPageAdmin() {
 
   const closeNewLockerDialog = () => {
     setIsNewLockerDialogOpen(false);
-  };
-  const openSearchDialog = () => {
-    setIsSearchDialogOpen(true);
   };
 
   const closeSearchDialog = () => {

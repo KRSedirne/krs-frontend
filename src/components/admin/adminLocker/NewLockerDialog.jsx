@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Alert } from "@mui/material";
+import toast from "react-hot-toast";
 
 export default function NewLockerDialog(props) {
   const { handleClose, open, handleNewLockerNumber, existingLockers, onCreateNewLocker } = props;
@@ -17,18 +17,12 @@ export default function NewLockerDialog(props) {
     const enteredLockerNumber = Number(lockerNumber);
 
     if (enteredLockerNumber <= 0) {
-  <Alert variant="outlined" severity="warning">
-  Lütfen geçerli bir dolap numarası giriniz
-  </Alert> 
+  toast.error("Lütfen geçerli bir dolap numarası girin") 
    return;
     }
 
-
- 
     if (existingLockers.includes(enteredLockerNumber)) {
-      <Alert variant="outlined" severity="warning">
-Bu dolap numarsı kullanılmakta lütfen geçerli bir numara giriniz.</Alert>
-      return;
+      toast.error("Bu dolap numarsı kullanılmakta lütfen geçerli bir numara giriniz.");
     }
 
     handleNewLockerNumber(enteredLockerNumber); // Pass the new locker number

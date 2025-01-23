@@ -1,27 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, Typography } from '@mui/material';
+import { getBlockDetails } from '../../api/block';
+import { createReservation } from '../../api/reservation/reservation';
+import toast from 'react-hot-toast';
 
-const CreateReservationModal = () => {
-  const [open, setOpen] = useState(false);
+const CreateReservationModal = ({ open, onClose, seat, setIsReservationSuccess }) => {
+  const [blockName, setBlockName] = useState(''); 
+  const [loading, setLoading] = useState(false); 
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleReservation = async () => {
+    try {
+      setLoading(true);
+
+      const reservationData = {
+        seat: seat._id, // Koltuk ID
+        block: seat.block, // Blok ID
+      };
+
+      // Rezervasyon API çağrısı
+      const response = await createReservation(reservationData);
+      toast(response.message || 'Reservations created successfully.');
+      onClose(); // Modal'ı kapat
+      setIsReservationSuccess(true);
+    } catch (error) {
+      toast(error.response?.data?.message || 'Reservation could not be created.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+  useEffect(() => {
+    const fetchBlockName = async () => {
+      if (seat && seat.block) {
+        setLoading(true);
+        try {
+          const response = await getBlockDetails(seat.block);
+          setBlockName(response.block?.name);
+          console.log(response);
+        } catch (error) {
+          console.error('Block name could not be fetched:', error);
+          setBlockName('Bilinmiyor');
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchBlockName();
+  }, [seat]);
+
 
   return (
-    <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Rezervasyon Yap
-      </Button>
       <Dialog 
         open={open} 
-        onClose={handleClose} 
+        onClose={onClose} 
         maxWidth="sm" // Modal'ın max genişliğini ayarlıyoruz
-        fullWidth={false} // Modal'ın tam genişlikte olmamasını sağlıyoruz
+        fullWidth
         sx={{ 
           margin: 'auto', // Modal'ı ekranın ortasına yerleştiriyoruz
           height: '100%', // Yüksekliği artırıyoruz
@@ -30,23 +65,27 @@ const CreateReservationModal = () => {
       >
         <DialogTitle>Koltuk Detayları</DialogTitle>
         <DialogContent>
-          <Typography variant="body1">Blok: A</Typography>
-          <Typography variant="body1">Salon: S1</Typography>
-          <Typography variant="body1">Koltuk No: 13</Typography>
-          <Typography variant="body2" color="textSecondary" sx={{ mt: 2 }}>
-            Rezervasyon yap’a tıkladıktan 15 dakika içerisinde QR’nizi okutun. Aksi takdirde rezervasyonunuz gerçekleşmeyecektir.
-          </Typography>
-        </DialogContent>
+        {loading ? (
+          <Typography>Yükleniyor...</Typography>
+        ) : (
+          <>
+            <Typography variant="body1">Blok Adı: {blockName}</Typography>
+            <Typography variant="body1">Salon Adı: {seat?.saloonName || 'Bilinmiyor'}</Typography>
+            <Typography variant="body1">Koltuk Numarası: {seat?.seatNumber || 'Bilinmiyor'}</Typography>
+          </>
+        )}
+      </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={onClose} color="primary">
             Kapat
           </Button>
-          <Button onClick={handleClose} color="secondary">
-            Rezervasyon Yap
-          </Button>
+          <Button onClick={handleReservation}
+          color="secondary"
+          disabled={loading}>
+          Rezervasyon Yap
+        </Button>
         </DialogActions>
       </Dialog>
-    </div>
   );
 };
 

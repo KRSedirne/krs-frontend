@@ -1,6 +1,5 @@
 import axios from "axios";
 import { UpUrl } from "../constant";
-import toast from "react-hot-toast";
 
 
 export const adminCreateLocker = async (lockerNumber) => {

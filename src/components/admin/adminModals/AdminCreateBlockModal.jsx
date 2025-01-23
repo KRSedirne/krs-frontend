@@ -3,7 +3,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField } 
 import { adminCreateBlock } from '../../../api/admin/adminBlock';
 import toast from 'react-hot-toast';
 
-const AdminCreateBlockModal = ({ setIsShowAdminCreateBlockModal }) => {
+const AdminCreateBlockModal = ({ setIsShowAdminCreateBlockModal,setIsCreatedBlockSubmitted }) => {
   const [blockName, setBlockName] = useState('');
 
   const handleClose = () => setIsShowAdminCreateBlockModal(false);
@@ -22,6 +22,7 @@ const AdminCreateBlockModal = ({ setIsShowAdminCreateBlockModal }) => {
     fetchData(blockName)
 
     setIsShowAdminCreateBlockModal(false);
+    setIsCreatedBlockSubmitted(true);
   }
 
   return (
@@ -33,24 +34,33 @@ const AdminCreateBlockModal = ({ setIsShowAdminCreateBlockModal }) => {
         fullWidth={true} // Modal genişliğinin tam ekran olmasını sağlıyoruz
         sx={{ 
           margin: 'auto', // Modal'ı ortalayalım
-          width: '40%', // Genişliği %70'e ayarlıyoruz
+          width: '40%', 
         }}
       >
-        <DialogTitle>Block Ekle</DialogTitle>
+        <DialogTitle
+        sx={{
+          backgroundColor:"#2A3C50",
+          color: "#FDFDF8",
+           fontWeight: "bold"
+        }}
+        >Block Ekle</DialogTitle>
         <DialogContent>
           <TextField
             label="Block Adı"
             fullWidth
             value={blockName}
             onChange={(e) => setBlockName(e.target.value)}
-            sx={{ marginBottom: 2 }}
+            sx={{ marginBottom: 1,
+              marginTop: 1,
+               color: "rgb(42, 60, 80)"
+             }}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose}sx={{ color: "rgb(42, 60, 80)" }}>
             Kapat
           </Button>
-          <Button onClick={submitHandler} color="secondary">
+          <Button onClick={submitHandler}sx={{ backgroundColor: "rgb(42, 60, 80)",color:"#FDFDF8" }}>
             Ekle
           </Button>
         </DialogActions>

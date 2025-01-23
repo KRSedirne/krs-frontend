@@ -25,7 +25,7 @@ const RegisterPage = () => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert('Şifreler eşleşmiyor!');
+      toast('Şifreler eşleşmiyor!');
       return;
     }
 

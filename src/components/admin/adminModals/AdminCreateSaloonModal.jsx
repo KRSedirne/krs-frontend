@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { adminAddSaloon } from '../../../api/admin/adminBlock.js';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Typography } from '@mui/material';
+import toast from 'react-hot-toast';
 
-const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,saloonId}) => {
+const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal,setIsCreatedSaloonSubmitted, blockId }) => {
   const [saloonName, setSaloonName] = useState('');
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
@@ -34,7 +35,7 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
 
   const handleSubmit = async () => {
     if (!saloonName || !image) {
-      alert('Lütfen salon adı ve resim seçiniz!');
+      toast('Lütfen salon adı ve resim seçiniz!');
       return;
     }
     const requestData = {
@@ -49,11 +50,12 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
       const response = await adminAddSaloon(requestData, blockId);
       console.log('Salon oluşturuldu:', response);
 
-      setIsLoading(false)
-      alert('Salon başarıyla oluşturuldu!');
+      setIsLoading(false);
+      setIsCreatedSaloonSubmitted(true);
+      toast.success('Salon başarıyla oluşturuldu!');
     } catch (error) {
       console.error('Error creating saloon:', error);
-      alert('Bir hata oluştu, lütfen tekrar deneyin!');
+      toast.error('Bir hata oluştu, lütfen tekrar deneyin!');
     }
   };
 
@@ -66,52 +68,59 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal, blockId ,salo
         fullWidth={true} // Modal genişliğinin tam ekran olmasını sağlıyoruz
         sx={{ 
           margin: 'auto', // Modal'ı ortalayalım
-          width: '40%', // Genişliği %70'e ayarlıyoruz
+          width: '40%',
+          color:"#FDFDF8"// Genişliği %70'e ayarlıyoruz
         }}
       >
-        <DialogTitle>Salon Ekle</DialogTitle>
+        <DialogTitle
+        sx={{backgroundColor:"#6587AD",color:"#FDFDF8",fontWeight:"bold"}}
+        >Salon Ekle</DialogTitle>
         <DialogContent>
           <TextField
             label="Salon Adı"
             fullWidth
             value={saloonName}
             onChange={(e) => setSaloonName(e.target.value)}
-            sx={{ marginBottom: 2 }}
+            sx={{ marginTop:1,
+              marginBottom: 2,
+              color:"rgb(42, 60, 80)"
+             }}
           />
            <TextField
             label="Resim Genişliği"
             fullWidth
             value={width}
             onChange={(e) => setWidth(e.target.value)}
-            sx={{ marginBottom: 2 }}
+            sx={{ marginBottom: 2,color:"rgb(42, 60, 80)"}}
           />
           <TextField
             label="Resim Yüksekliği"
             fullWidth
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            sx={{ marginBottom: 2 }}
+            sx={{ marginBottom: 2,color:"rgb(42, 60, 80)" }}
           />
-          <Typography variant="body2" sx={{ marginBottom: 1 }}>
+          <Typography variant="body2" sx={{ marginBottom: 1,color:"rgb(42, 60, 80)" }}>
             Resim Seç:
           </Typography>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            style={{ marginBottom: '16px', display: 'block' }}
+            style={{ marginBottom: '16px', display: 'block', }}
           />
           {image && (
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant="body2" 
+            sx={{color:"rgb(42, 60, 80)"}}>
               Yüklenen Resim: {saloonName}
             </Typography>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} sx={{color:"rgb(42, 60, 80)"}}>
             Kapat
           </Button>
-          <Button onClick={handleSubmit} color="secondary">
+          <Button onClick={handleSubmit} sx={{backgroundColor:"#6587AD",color:"#FDFDF8",fontWeight:"bold"}}>
             Gönder
           </Button>
         </DialogActions>
