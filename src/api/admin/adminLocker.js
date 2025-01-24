@@ -10,17 +10,14 @@ export const adminCreateLocker = async (lockerNumber) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response);
       return response.data;
     } catch (error) {
-      console.log(error);
       console.error("Failed to add locker:", error);
     }
   };
   export const adminReserveLocker = async (lockerId, userEmail) => {
     try {
       const token = localStorage.getItem("authToken");
-      console.log("User email:",userEmail)
   
       const response = await axios.put(
         `${UpUrl}/locker/reservation/${lockerId}`,
@@ -31,7 +28,6 @@ export const adminCreateLocker = async (lockerNumber) => {
           },
         }
       );
-      console.log("Locker reserved:", response.data);
       return response.data;
     } catch (error) {
       console.error("Failed to reserve locker:", error.response ? error.response.data : error);
@@ -55,7 +51,6 @@ export const adminCreateLocker = async (lockerNumber) => {
   export const adminGetLockerByEmail = async (email) => {
     try {
       const token = localStorage.getItem("authToken");
-      console.log(token);
       const response = await axios.post(`${UpUrl}/locker/email`, {email}, {
         headers: {
           Authorization: `Bearer ${token}`,

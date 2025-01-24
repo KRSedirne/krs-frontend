@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./HomePage.css";
 import { Box, Typography } from "@mui/material";
 import CurrentReservationItem from "../../components/reservation/CurrentReservationItem";
+import CreateOutreasonModal from "../../components/modals/CreateOutreasonModal";
 
 const Home = () => {
-const [exist,setExist]=useState(false);
-const handleExistComponent=(data)=>setExist(data);
+
+  const [isShowCreateOutreasonModal, setIsShowCreateOutreasonModal] = useState(false);
+  const [seatReservationId, setSeatReservationId] = useState('');
 
   return (  
     <Box
@@ -34,7 +36,9 @@ const handleExistComponent=(data)=>setExist(data);
       </Typography>
 
       {/* CurrentReservationItem bileşeni */}
-    <CurrentReservationItem exist={handleExistComponent}/>
+      <CurrentReservationItem setIsShowCreateOutreasonModal={setIsShowCreateOutreasonModal} setSeatReservationId={setSeatReservationId} />
+
+      {isShowCreateOutreasonModal && <CreateOutreasonModal setIsShowCreateOutreasonModal={setIsShowCreateOutreasonModal} seatReservationId={seatReservationId}/>}
     </Box>
   );
 };

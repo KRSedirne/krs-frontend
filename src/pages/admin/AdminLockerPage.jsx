@@ -67,18 +67,14 @@ export default function LockerPageAdmin() {
   const fetchEmail = async (userId) => {
     try {
       const userData = await adminGetUser(userId);
-      console.log("User data fetched:", userData);  
         setEmail(userData.data.email); 
     } catch (error) {
-      console.error("Error fetching user info:", error);
       setEmail(null); 
     }
   };
   useEffect(() => {
     if (selectedLocker && selectedLocker.user) {
       fetchEmail(selectedLocker.user); 
-    } else {
-      console.log("No user associated with the selected locker:", selectedLocker);
     }
   }, [selectedLocker]);
   
@@ -163,8 +159,7 @@ export default function LockerPageAdmin() {
       setLockerNewReservationDialogOpen(false);
       toast.success(`${userEmail} emailine  ${selectedLocker.lockerNumber} numaralı dolap atanmıştır.`)
     } catch (error) {
-      console.error("Failed to reserve locker:", error);
-      toast.error(error.message || "Failed to reserve locker. Please try again.");
+      toast.error("Dolap rezerve edilemedi. Lütfen tekrar deneyiniz.");
     }
   };
   const handleClosebySubmitSearch = async (email) => {
@@ -177,8 +172,7 @@ else{
 }
       setIsSearchDialogOpen(false);
     } catch (error) {
-      console.error("Failed to reserve locker:", error);
-      toast.error(error.message || "Failed to reserve locker. Please try again.");
+      toast.error("Dolap rezerve edilemedi. Lütfen tekrar deneyiniz.");
     }
   };
 
@@ -229,27 +223,26 @@ else{
   const handleCancel = async (lockerId) => {
     try {
       const result = await adminCancelLockerReservation(lockerId);
-      console.log("Rezervasyon iptal edildi:", result);
       const data = await getLockers();
       setLockersData(data.response);
       toast.success("Rezervasyon başarıyla iptal edildi!");
       setOpen(false);
     } catch (error) {
-      console.error("Rezervasyon iptal edilirken hata oluştu:", error);
+      toast.error("Rezervasyon iptal edilemedi.");
     }
   };
   
   const handleExpand = async (lockerId) => {
     try {
       const result = await adminExpandedLockerTime(lockerId);
-      console.log("Dolap rezervasyounun süresi uzatıldı:", result);
+
       const data = await getLockers();
       setLockersData(data.response);
-      toast("Dolap rezervasyonunun sürersi başarıyla uzatıldı!");
+      toast.success("Dolap rezervasyonunun sürersi başarıyla uzatıldı!");
       setOpen(false);
 
     } catch (error) {
-      console.error("Dolap rezervasyounun süresi uzatılırken hata oluştu:", error);
+      toast.error("Dolap rezervasyounun süresi uzatılamadı.");
     }
   };
   

@@ -48,7 +48,7 @@ const LoginPage = () => {
     const fetchData = async (data) => {
       try {
         const response = await login(data)
-        console.log(response)
+
         if (response.success) {
           if (rememberMe) {
             localStorage.setItem('rememberMeEmail', email);
@@ -59,8 +59,7 @@ const LoginPage = () => {
         }
       }
       catch (error) {
-        console.log(error)
-        toast.error(error.response.data.message)
+        toast.error("Geçersiz işlem... Lütfen tekrar deneyiniz.")
       }
     }
     fetchData(data)

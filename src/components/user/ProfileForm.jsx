@@ -32,7 +32,7 @@ const ProfileForm = () => {
 
         setIsLoading(false)
       } catch (error) {
-        toast.error(error.response.data.message) // productin error message olması gerek, backend buna göre düzenlenmeli
+        toast.error("Profil yüklenemedi. Lütfen tekrar deneyiniz.") // productin error message olması gerek, backend buna göre düzenlenmeli
       }
     }
     fetchData()

@@ -18,7 +18,6 @@ export default function LockerDialog(props) {
   const date = new Date(dateString);
   date.setDate(date.getDate() + 5);
   const formattedDate = date.toLocaleDateString("tr-TR");
-  console.log("5 gün sonrası (TR):", formattedDate);
   return (
     <React.Fragment>
 

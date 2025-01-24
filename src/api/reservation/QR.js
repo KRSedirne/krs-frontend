@@ -6,17 +6,14 @@ import toast from "react-hot-toast";
 export const getQRCode = async () => {
   try {
     const token = localStorage.getItem("authToken");
-    console.log("Token gönderiliyor:", token); // Debug
     const response = await axios.get(`${BaseUrl}/reservation/qrcode`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Axios Error:", error.response || error.message);
-    toast.error("Rezervasyon bulunamadı.")
   }
 };
 export const getUserbyQR= async (qrcode)=>{
@@ -31,6 +28,5 @@ export const getUserbyQR= async (qrcode)=>{
     return response.data;
   } catch (error) {
     console.error("Failed to reserve locker:", error);
-    console.log(error.response?.data?.message || "Failed to reserve locker. Please try again.");
   }
 }

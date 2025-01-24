@@ -9,7 +9,6 @@ export const adminGetAllSuspendeds = async () => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log("api:", response.data);
         return response.data;
     } catch (error) {
         throw error;

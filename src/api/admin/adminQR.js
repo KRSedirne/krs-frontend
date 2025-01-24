@@ -11,7 +11,6 @@ export const adminCheckInReservation = async (qrCode) => {
         });
   
         const { userId } = response.data;
-        console.log("Kullanıcı ID'si:", userId);
   
         if (userId) {
             const additionalResponse = await axios.get(`${UpUrl}/user/${userId}`,{
@@ -20,7 +19,6 @@ export const adminCheckInReservation = async (qrCode) => {
               },} );
   
             // Ekstra yanıtı işleyin
-            console.log("Ekstra veri alındı:", additionalResponse.data);
             return additionalResponse.data;
         }
     } catch (error) {
@@ -28,7 +26,6 @@ export const adminCheckInReservation = async (qrCode) => {
     }
   };
   export const adminCheckInReservationManually = async (email) => {
-    console.log(email);
     try {
       const token = localStorage.getItem("authToken");
         const response = await axios.put(`${UpUrl}/checkqr/manuel`, { email },{
@@ -37,9 +34,7 @@ export const adminCheckInReservation = async (qrCode) => {
           },
         });
   
-        const { userId } = response.data;
-        console.log("Kullanıcı ID'si:", userId);
-  
+        const { userId } = response.data;  
         if (userId) {
             const additionalResponse = await axios.get(`${UpUrl}/user/${userId}`,{
               headers: {
@@ -47,7 +42,6 @@ export const adminCheckInReservation = async (qrCode) => {
               },} );
   
             // Ekstra yanıtı işleyin
-            console.log("Ekstra veri alındı:", additionalResponse.data);
             return additionalResponse.data;
         }
     } catch (error) {

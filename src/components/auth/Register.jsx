@@ -39,7 +39,6 @@ const RegisterPage = () => {
     const fetchData = async (data) => {
       try {
         const response = await register(data);
-        console.log(response);
         navigate('/profile');
       } catch (error) {
         toast.error(error.response.data.message);
@@ -48,12 +47,6 @@ const RegisterPage = () => {
 
     fetchData(data);
 
-    console.log('Kayıt olunuyor:', {
-      name,
-      lastname,
-      email,
-      password,
-    });
   };
 
   return (

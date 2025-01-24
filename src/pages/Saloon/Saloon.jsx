@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Paper } from '@mui/material';
 import {getAllBlocks} from '../../api/block'
 import SaloonItem from '../../components/saloon/SaloonItem';
+import toast from 'react-hot-toast';
 
 const Saloon = () => {
 
@@ -9,16 +10,16 @@ const Saloon = () => {
 
   const [data, setData] = useState([]);
   
-
+  const fetchData = async () => {
+    try {
+      const response = await getAllBlocks();
+      setData(response.blocks);
+    } catch (error) {
+      toast.error("Yüklenemedi.")
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllBlocks();
-        setData(response.blocks);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    
     fetchData();  
   }, []);
 

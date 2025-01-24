@@ -26,11 +26,11 @@ const ForgetPasswordModal = ({ isOpen, handleClose }) => {
 
     try {
       const response = await forgetPassword({ email });
-      toast.success(response.message);
+      toast.success("Şifre sıfırlama linki mail adresinize gönderilmiştir.");
       handleClose();
       setErrorMessage('');
     } catch (error) {
-      toast.error(error.response ? error.response.data.message : 'Bir şeyler yanlış gitti.');
+      toast.error('Bir şeyler yanlış gitti.');
       setErrorMessage(error.response ? error.response.data.message : 'Bir şeyler yanlış gitti.');
     } finally {
       setIsLoading(false);

@@ -38,7 +38,6 @@ export const adminDeleteBlock=async(id)=>{
       });
       return response.data;
     } catch (error) {
-        console.log(error);
       console.error("Failed to delete block:", error);
     }
   }

@@ -9,7 +9,6 @@ const AdminSaloonItem = ({ block }) => {
     const navigate = useNavigate();
 
     const handleSalonClick = (salonId) => {
-        console.log('Tıklanan salon ID:', salonId);
         navigate(`/saloonImage?id=${salonId}`); // Query parametre ile salon ID'sini geçir
     };
 

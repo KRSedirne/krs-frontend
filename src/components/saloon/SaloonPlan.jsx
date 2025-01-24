@@ -1,11 +1,9 @@
-import React, { use, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { getSaloonImages } from '../../api/block.js';
 import { getSeatsBySaloonId } from '../../api/seat.js';
 import { useLocation } from 'react-router-dom';
 import { Box, Button, CircularProgress } from '@mui/material';
-import LockIcon from '@mui/icons-material/Lock';
 import CreateReservationModal from '../modals/CreateReservationModal';
-import toast from 'react-hot-toast';
 
 const SaloonPlan = () => {
   const location = useLocation(); 
@@ -24,7 +22,6 @@ const SaloonPlan = () => {
     const fetchData = async () => {
       try {
         const response = await getSaloonImages(saloonId);
-        console.log(response);
         setSaloonImage(response.url);
 
         setImageDimensions({
@@ -136,4 +133,4 @@ const SaloonPlan = () => {
   </Box>
 );
 };
-export default SaloonPlan;
+export default SaloonPlan;

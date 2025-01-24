@@ -19,11 +19,11 @@ const CreateReservationModal = ({ open, onClose, seat, setIsReservationSuccess }
 
       // Rezervasyon API çağrısı
       const response = await createReservation(reservationData);
-      toast(response.message || 'Reservations created successfully.');
+      toast.success('Reservations başarıyla oluşturulmuştur.');
       onClose(); // Modal'ı kapat
       setIsReservationSuccess(true);
     } catch (error) {
-      toast(error.response?.data?.message || 'Reservation could not be created.');
+      toast('Rezervasyon yapılamamıştır. Lütfen tekrar deneyiniz.');
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,6 @@ const CreateReservationModal = ({ open, onClose, seat, setIsReservationSuccess }
         try {
           const response = await getBlockDetails(seat.block);
           setBlockName(response.block?.name);
-          console.log(response);
         } catch (error) {
           console.error('Block name could not be fetched:', error);
           setBlockName('Bilinmiyor');

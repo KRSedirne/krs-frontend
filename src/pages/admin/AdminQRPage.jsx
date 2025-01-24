@@ -34,14 +34,11 @@ export default function QRPageAdmin() {
     };
 
     const handleUserUpdate = (userData) => {
-        console.log(userData);
-        console.log({ name: capitalize(userData.name), lastname: capitalize(userData.lastname) });
         setUser({ name: capitalize(userData.name), lastname: capitalize(userData.lastname) });
-        console.log(user);
+
     };
 
     const handleManuelCheckIn = async (data) => {
-        console.log("data:", data);
         const userData = await adminCheckInReservationManually(data);
         handleUserUpdate(userData.data);
         handleClose();
@@ -50,7 +47,6 @@ export default function QRPageAdmin() {
  
     useEffect(() => {
         if (user) {
-            console.log("user in useEffect:",user);
             const timer = setTimeout(() => {
                 setUser(null);
             }, 10000);

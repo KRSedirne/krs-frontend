@@ -7,7 +7,6 @@ export const login = async (data) => {
         const response = await axios.post(`${BaseUrl}/login`, data);
         const token = response.data.token;
         localStorage.setItem('authToken', token);
-        console.log(response.data)
         return response.data;
     } catch (error) {
         throw error;
@@ -39,8 +38,6 @@ export const logout = async (data) => {
         });
 
         localStorage.removeItem('authToken');
-
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.error("Logout sırasında hata:", error.message);

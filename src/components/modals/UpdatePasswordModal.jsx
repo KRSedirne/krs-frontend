@@ -37,9 +37,9 @@ const UpdatePasswordModal = ({ setIsShowUpdatePasswordModal }) => {
     const fetchData = async (data) => {
         try {
             const response = await updatePassword(data)
-            toast.success(response.message)
+            toast.success("Şifre başarıyla güncellendi.")
         } catch (error) {
-            toast.error(error.response.data.message)
+            toast.error("Şifre güncellenirken hata oluştu. Lütfen tekrar deneyiniz.")
         }
     }
     fetchData(data)

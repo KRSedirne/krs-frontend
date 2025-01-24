@@ -23,7 +23,6 @@ export const getSaloonImages = async (saloonId) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
         throw error;
@@ -38,9 +37,8 @@ export const getBlockDetails = async (blockId) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log(response.data);
         return response.data;
     } catch (error) {
-        throw error;
-    }
+        throw error;
+    }
 };

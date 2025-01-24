@@ -35,12 +35,9 @@ Lütfen giriş yapınız.
     const fetchLockersData = async () => {
       try {
         const data = await getLockers();
-        console.log("Fetched lockers data:", data.response); // Log data to check format
-
         setLockersData(data.response);
       } catch (error) {
-        console.error("Locker data couldn't be reached:", error);
-        toast.error(error.message || "Failed to load locker data. Please try again.");
+        toast.error("Dolaplar yüklenemedi. Lütfen tekrar deneyiniz.");
       }
     };
     fetchLockersData();
@@ -70,20 +67,12 @@ Lütfen giriş yapınız.
       />
     </Grid>
   ));
-  //sil
-  lockersData.forEach((locker) => {
-    console.log("lockerNum:", locker.lockerNumber);
-  });
-  console.log("lockersData:", lockersData);
   const showModal = (lockerNumber) => {
     const locker = lockersData.find((locker) => locker.lockerNumber === lockerNumber);
     if (locker) {
       setSelectedLocker(locker);
       setOpen(true);
-      console.log("Selected Locker:", locker);
-    } else {
-      console.error("Locker not found for lockerNumber:", lockerNumber);
-    }
+    } 
   };
   
 
@@ -93,19 +82,13 @@ Lütfen giriş yapınız.
       const id=selectedLocker._id
       await reserveLocker(id);
       
-      // setLockersData((prevLockers) =>
-      //   prevLockers.map((locker) =>
-      //     locker.lockerNumber === selectedLocker.lockerNumber
-      //       ? { ...locker, isBooked: true, user: userId }
-      //       : locker
-      //   ));
       const data = await getLockers();
       setLockersData(data.response);
       
       setOpen(false);
     } catch (error) {
-      console.error("Failed to reserve locker:", error);
-      toast.error(error.message || "Failed to reserve locker. Please try again.");
+
+      toast.error( "Dolap rezerve edilemedi. Lütfen tekrar deneyiniz.");
     }
   };
 

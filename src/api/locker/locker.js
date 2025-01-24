@@ -7,7 +7,6 @@ import toast from "react-hot-toast";
 export const getLockers = async () => {
   try {
     const token = localStorage.getItem("authToken");
-    console.log("Token gönderiliyor:", token); // Debug
     const response = await axios.get(`${BaseUrl}/lockers`, {
       headers: {
         Authorization: `Bearer ${token}`,

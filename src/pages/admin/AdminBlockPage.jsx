@@ -37,7 +37,7 @@ export default function AdminBlockPage() {
       const response = await adminGetAllBlocks();
       setData(response.blocks);
     } catch (error) {
-      console.log(error);
+      toast.error("Yüklenilemedi.")
     }
   };
 
@@ -57,12 +57,11 @@ export default function AdminBlockPage() {
   const handleCloseDeleteSaloon=()=>{
     setIsDeleteSaloonDialogOpen(false);
   }
-  //hotreload atıyor direkt success mesajı çıkmıyor
   const handleSubmitDeleteBlock = async (blockId) => {
     try {
-      console.log("Deleting Block with ID:", blockId);
+ 
       const response = await adminDeleteBlock(blockId);
-      console.log("API Response:", response);
+
       if (response) {
         toast.success("Block başarıyla silindi!");
         setIsDeleteBlockDialogOpen(false);
@@ -70,29 +69,25 @@ export default function AdminBlockPage() {
       }
     } catch (error) {
       console.error("Silme işlemi başarısız:", error);
-      toast.error(error.message || "Blok silerken bir hata oluştu.");
+      toast.error("Blok silerken bir hata oluştu.");
     }
   };
   const handleSubmitDeleteSaloon = async (saloonId,blockId) => {
     try {
-      console.log("Deleting Saloon with ID:", saloonId);
       const response = await adminDeleteSaloon(saloonId,blockId);
-      console.log("API Response:", response);
       if (response) {
         toast.success("Saloon başarıyla silindi!");
         setIsDeleteSaloonDialogOpen(false);
         await fetchData();
       }
     } catch (error) {
-      console.error("Silme işlemi başarısız:", error);
-      toast.error(error.message || "Salon silerken bir hata oluştu.");
+      toast.error( "Salon silerken bir hata oluştu.");
     }
   };
  
   const showModalDeleteBlock = async (blockId) => {
     const block = await adminGetBlock(blockId);
     setSelectedBlock(block.block);
-    console.log(selectedBlock);
     if (block) {
       setIsDeleteBlockDialogOpen(true);
     } else {
@@ -101,13 +96,11 @@ export default function AdminBlockPage() {
   };
   const showModalDeleteSaloon=async (saloonId,blockId)=>{
     const response=await adminGetSaloon(saloonId,blockId);
-    console.log(response);
     setSelectedBlock(response.block);
     setSelectedSaloon(response.saloon);
     if(response){
       setIsDeleteSaloonDialogOpen(true);
     }
-    else console.log("Saloon or block not found.")
   }
 
   const showModalCreateSaloon=async(blockId)=>{

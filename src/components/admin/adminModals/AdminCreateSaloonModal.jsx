@@ -44,17 +44,14 @@ const AdminCreateSaloonModal = ({ setIsShowAdminCreateSaloonModal,setIsCreatedSa
       width: parseInt(width, 10),
       height: parseInt(height, 10),
     };
-    console.log('requestData:', requestData);
 
     try {
       const response = await adminAddSaloon(requestData, blockId);
-      console.log('Salon oluşturuldu:', response);
-
       setIsLoading(false);
       setIsCreatedSaloonSubmitted(true);
+      handleClose();
       toast.success('Salon başarıyla oluşturuldu!');
     } catch (error) {
-      console.error('Error creating saloon:', error);
       toast.error('Bir hata oluştu, lütfen tekrar deneyin!');
     }
   };

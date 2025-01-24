@@ -21,7 +21,7 @@ export default function ColumnTwo() {
         const response = await getQRCode();
         setValue(response.qrCode);
       } catch (error) {
-        toast.error("no reservation found")
+        toast.error("Rezervasyon bulunamadı.")
       }
     }
     fetchData()

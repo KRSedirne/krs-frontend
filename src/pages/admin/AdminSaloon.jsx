@@ -4,6 +4,7 @@ import { adminGetAllBlocks } from '../../api/admin/adminBlock'; // API fonksiyon
 import AdminSaloonItem from '../../components/admin/adminSaloon/AdminSaloonItem';
 import AdminCreateBlockItem from '../../components/admin/AdminCreateBlockItem';
 import AdminCreateBlockModal from '../../components/admin/adminModals/AdminCreateBlockModal';
+import toast from 'react-hot-toast';
 
 
 const AdminSaloon = () => {
@@ -16,7 +17,7 @@ const AdminSaloon = () => {
         const response = await adminGetAllBlocks();
         setData(response.blocks);
       } catch (error) {
-        console.log(error);
+        toast.error("Yüklenemedi...");
       }
     };
     fetchData();  

@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 import { adminDeleteSuspended, adminGetAllSuspendeds } from '../../api/admin/adminSuspended';
 import { Button } from '@mui/material'; // Butonları kullanmak için MUI'dan import ediyoruz
+import toast from 'react-hot-toast';
 
 const columns = [
     { width: 70, label: 'Ad', dataKey: 'name' },
@@ -27,7 +28,7 @@ const AdminSuspended = () => {
             const response = await adminGetAllSuspendeds();
             setData(response.response);
         } catch (error) {
-            console.log(error);
+            toast.error("Yüklenemedi...")
         }
     }
 
@@ -35,19 +36,18 @@ const AdminSuspended = () => {
         const deleteSuspended = async (id) => {
             try {
                 const response = await adminDeleteSuspended(id);
-                console.log(response);
+                toast.success("Ceza kaldırıldı.")
                 fetchData();
             } catch (error) {
-                console.log(error);
+            toast.error("Ceza kaldırılamadı.");
             }
         };
         deleteSuspended(id);
-        console.log(`Delete clicked for ID: ${id}`);
     };
 
     useEffect(() => {
         fetchData();
-    }, []); // data yazarsan sonsuz döngüye girer
+    }, []); 
 
  
     

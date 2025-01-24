@@ -67,10 +67,10 @@ const Sidebar = ({ onToggle }) => {
     try {
       await logout(); 
       localStorage.removeItem('authToken'); 
-      toast.success("Successfully logged out!");
+      toast.success("Başarıyla çıkış yapılmıştır!");
       navigate('/');
     } catch (error) {
-      toast.error("Error during logout");
+      toast.error("Çıkış yaparken hata meydana gelmiştir. Lütfen tekrar deneyiniz.");
       console.error(error);
     }
   };

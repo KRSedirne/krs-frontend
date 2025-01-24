@@ -8,8 +8,6 @@ const SaloonItem = ({ block }) => {
   const navigate = useNavigate();
 
   const handleSalonClick = (salonId) => {
-
-    console.log('Tıklanan salon ID:', salonId);
     navigate(`/saloonImage?id=${salonId}`);
   };
 
