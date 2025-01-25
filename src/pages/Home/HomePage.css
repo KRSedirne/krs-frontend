@@ -1,0 +1,14 @@
+.sideBar-container{
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url(../../../public/images/library.png); 
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* position: absolute;
+    z-index: -1; */
+}
